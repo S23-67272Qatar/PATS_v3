@@ -1,11 +1,11 @@
 67272_PATS_v3
 ==
 
-This is a basic Rails app that was built as a class demonstration in the spring of 2018.  This version focuses more on using VueJS, enhancing the user experience with Ajax, and adding search functionality.
+This is a basic Rails app that was built as a class demonstration in the Spring of 2023.  
 
-The class is Application Design & Development (67-272) and is for students in [Information Systems at Carnegie Mellon University](https://67272.cmuis.net). We have posted this code on [github.com](https://github.com/profh) in a public directory so that (a) it is readily accessible to students and (b) that students will get a little familiarity with github.com.
+The class is Application Design & Development (67-272) and is for students in Information Systems at Carnegie Mellon University. We have posted this code on [github.com](https://github.com/S23-67272Qatar/PATS_v3) in a public directory so that (a) it is readily accessible to students and (b) that students will get a little familiarity with github.com.
 
-This project does require the use of several gems to work properly. Check the Gemfile to see which gems are used. This project also assumes the user is running Ruby 2.4.x since that is what is used in the course.
+This project does require the use of several gems to work properly. Check the Gemfile to see which gems are used. This project also assumes the user is running Ruby 3.1.2 since that is what is used in the course.
 
 
 Setup
