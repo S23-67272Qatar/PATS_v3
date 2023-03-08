@@ -1,0 +1,1296 @@
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "active_storage_attachments"[0m
+  [1m[35m (2.1ms)[0m  [1m[35mCREATE TABLE "active_storage_attachments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar NOT NULL, "record_type" varchar NOT NULL, "record_id" bigint NOT NULL, "blob_id" bigint NOT NULL, "created_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_active_storage_attachments_on_blob_id" ON "active_storage_attachments" ("blob_id")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_attachments_uniqueness" ON "active_storage_attachments" ("record_type", "record_id", "name", "blob_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "active_storage_blobs"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "active_storage_blobs" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "key" varchar NOT NULL, "filename" varchar NOT NULL, "content_type" varchar, "metadata" text, "service_name" varchar NOT NULL, "byte_size" bigint NOT NULL, "checksum" varchar, "created_at" datetime(6) NOT NULL)[0m
+  [1m[35m (6.9ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_blobs_on_key" ON "active_storage_blobs" ("key")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "active_storage_variant_records"[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE TABLE "active_storage_variant_records" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "blob_id" bigint NOT NULL, "variation_digest" varchar NOT NULL)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_variant_records_uniqueness" ON "active_storage_variant_records" ("blob_id", "variation_digest")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "animal_medicines"[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE TABLE "animal_medicines" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "animal_id" integer, "medicine_id" integer, "recommended_num_of_units" integer)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_animal_medicines_on_animal_id" ON "animal_medicines" ("animal_id")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_animal_medicines_on_medicine_id" ON "animal_medicines" ("medicine_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "animals"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "animals" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "active" boolean DEFAULT 1)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "dosages"[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE TABLE "dosages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "visit_id" integer, "medicine_id" integer, "units_given" integer, "discount" float DEFAULT 0.0)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_dosages_on_medicine_id" ON "dosages" ("medicine_id")[0m
+  [1m[35m (9.8ms)[0m  [1m[35mCREATE INDEX "index_dosages_on_visit_id" ON "dosages" ("visit_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "medicine_costs"[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "medicine_costs" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "medicine_id" integer, "cost_per_unit" integer, "start_date" date, "end_date" date)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_medicine_costs_on_medicine_id" ON "medicine_costs" ("medicine_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "medicines"[0m
+  [1m[35m (6.2ms)[0m  [1m[35mCREATE TABLE "medicines" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "description" text, "stock_amount" integer, "admin_method" varchar, "unit" varchar, "vaccine" boolean, "active" boolean DEFAULT 1)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "notes"[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "notes" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "notable_type" varchar, "notable_id" integer, "title" varchar, "content" text, "user_id" integer, "written_on" datetime)[0m
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE INDEX "index_notes_on_user_id" ON "notes" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "owners"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "owners" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "street" varchar, "city" varchar, "state" varchar, "zip" varchar, "phone" varchar, "email" varchar, "active" boolean DEFAULT 1, "user_id" integer)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "pets"[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "pets" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "animal_id" integer, "owner_id" integer, "female" boolean, "date_of_birth" date, "active" boolean DEFAULT 1)[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE INDEX "index_pets_on_animal_id" ON "pets" ("animal_id")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_pets_on_owner_id" ON "pets" ("owner_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "procedure_costs"[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "procedure_costs" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "procedure_id" integer, "cost" integer, "start_date" date, "end_date" date)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_procedure_costs_on_procedure_id" ON "procedure_costs" ("procedure_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "procedures"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "procedures" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "description" text, "length_of_time" integer, "active" boolean DEFAULT 1)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "treatments"[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "treatments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "visit_id" integer, "procedure_id" integer, "successful" boolean, "discount" float DEFAULT 0.0)[0m
+  [1m[35m (7.4ms)[0m  [1m[35mCREATE INDEX "index_treatments_on_procedure_id" ON "treatments" ("procedure_id")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_treatments_on_visit_id" ON "treatments" ("visit_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "role" integer, "username" varchar, "password_digest" varchar, "active" boolean DEFAULT 1)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "visits"[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "visits" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "pet_id" integer, "date" date, "weight" float, "overnight_stay" boolean, "total_charge" integer)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_visits_on_pet_id" ON "visits" ("pet_id")[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aactive_storage_attachments" ("id" integer NOT NULL PRIMARY KEY, "name" varchar NOT NULL, "record_type" varchar NOT NULL, "record_id" integer NOT NULL, "blob_id" integer NOT NULL, "created_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "tindex_aactive_storage_attachments_uniqueness" ON "aactive_storage_attachments" ("record_type", "record_id", "name", "blob_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_aactive_storage_attachments_on_blob_id" ON "aactive_storage_attachments" ("blob_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aactive_storage_attachments" ("id","name","record_type","record_id","blob_id","created_at")
+                     SELECT "id","name","record_type","record_id","blob_id","created_at" FROM "active_storage_attachments"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "active_storage_attachments"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "active_storage_attachments" ("id" integer NOT NULL PRIMARY KEY, "name" varchar NOT NULL, "record_type" varchar NOT NULL, "record_id" integer NOT NULL, "blob_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_c3b3935057"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_active_storage_attachments_on_blob_id" ON "active_storage_attachments" ("blob_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_attachments_uniqueness" ON "active_storage_attachments" ("record_type", "record_id", "name", "blob_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("id","name","record_type","record_id","blob_id","created_at")
+                     SELECT "id","name","record_type","record_id","blob_id","created_at" FROM "aactive_storage_attachments"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "aactive_storage_attachments"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (10.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aactive_storage_variant_records" ("id" integer NOT NULL PRIMARY KEY, "blob_id" integer NOT NULL, "variation_digest" varchar NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "tindex_aactive_storage_variant_records_uniqueness" ON "aactive_storage_variant_records" ("blob_id", "variation_digest")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aactive_storage_variant_records" ("id","blob_id","variation_digest")
+                     SELECT "id","blob_id","variation_digest" FROM "active_storage_variant_records"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "active_storage_variant_records"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "active_storage_variant_records" ("id" integer NOT NULL PRIMARY KEY, "blob_id" integer NOT NULL, "variation_digest" varchar NOT NULL, CONSTRAINT "fk_rails_993965df05"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_variant_records_uniqueness" ON "active_storage_variant_records" ("blob_id", "variation_digest")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "active_storage_variant_records" ("id","blob_id","variation_digest")
+                     SELECT "id","blob_id","variation_digest" FROM "aactive_storage_variant_records"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "aactive_storage_variant_records"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aanimal_medicines" ("id" integer NOT NULL PRIMARY KEY, "animal_id" integer DEFAULT NULL, "medicine_id" integer DEFAULT NULL, "recommended_num_of_units" integer DEFAULT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_aanimal_medicines_on_medicine_id" ON "aanimal_medicines" ("medicine_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_aanimal_medicines_on_animal_id" ON "aanimal_medicines" ("animal_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aanimal_medicines" ("id","animal_id","medicine_id","recommended_num_of_units")
+                     SELECT "id","animal_id","medicine_id","recommended_num_of_units" FROM "animal_medicines"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "animal_medicines"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "animal_medicines" ("id" integer NOT NULL PRIMARY KEY, "animal_id" integer DEFAULT NULL, "medicine_id" integer DEFAULT NULL, "recommended_num_of_units" integer DEFAULT NULL, CONSTRAINT "fk_rails_5339bf446e"
+FOREIGN KEY ("animal_id")
+  REFERENCES "animals" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_animal_medicines_on_animal_id" ON "animal_medicines" ("animal_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_animal_medicines_on_medicine_id" ON "animal_medicines" ("medicine_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "animal_medicines" ("id","animal_id","medicine_id","recommended_num_of_units")
+                     SELECT "id","animal_id","medicine_id","recommended_num_of_units" FROM "aanimal_medicines"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "aanimal_medicines"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aanimal_medicines" ("id" integer NOT NULL PRIMARY KEY, "animal_id" integer DEFAULT NULL, "medicine_id" integer DEFAULT NULL, "recommended_num_of_units" integer DEFAULT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_aanimal_medicines_on_medicine_id" ON "aanimal_medicines" ("medicine_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_aanimal_medicines_on_animal_id" ON "aanimal_medicines" ("animal_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aanimal_medicines" ("id","animal_id","medicine_id","recommended_num_of_units")
+                     SELECT "id","animal_id","medicine_id","recommended_num_of_units" FROM "animal_medicines"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "animal_medicines"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "animal_medicines" ("id" integer NOT NULL PRIMARY KEY, "animal_id" integer DEFAULT NULL, "medicine_id" integer DEFAULT NULL, "recommended_num_of_units" integer DEFAULT NULL, CONSTRAINT "fk_rails_5339bf446e"
+FOREIGN KEY ("animal_id")
+  REFERENCES "animals" ("id")
+, CONSTRAINT "fk_rails_b30256a006"
+FOREIGN KEY ("medicine_id")
+  REFERENCES "medicines" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_animal_medicines_on_animal_id" ON "animal_medicines" ("animal_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_animal_medicines_on_medicine_id" ON "animal_medicines" ("medicine_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "animal_medicines" ("id","animal_id","medicine_id","recommended_num_of_units")
+                     SELECT "id","animal_id","medicine_id","recommended_num_of_units" FROM "aanimal_medicines"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "aanimal_medicines"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (5.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "adosages" ("id" integer NOT NULL PRIMARY KEY, "visit_id" integer DEFAULT NULL, "medicine_id" integer DEFAULT NULL, "units_given" integer DEFAULT NULL, "discount" float DEFAULT 0.0)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_adosages_on_visit_id" ON "adosages" ("visit_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_adosages_on_medicine_id" ON "adosages" ("medicine_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "adosages" ("id","visit_id","medicine_id","units_given","discount")
+                     SELECT "id","visit_id","medicine_id","units_given","discount" FROM "dosages"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE "dosages"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "dosages" ("id" integer NOT NULL PRIMARY KEY, "visit_id" integer DEFAULT NULL, "medicine_id" integer DEFAULT NULL, "units_given" integer DEFAULT NULL, "discount" float DEFAULT 0.0, CONSTRAINT "fk_rails_fc9bbcef74"
+FOREIGN KEY ("medicine_id")
+  REFERENCES "medicines" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_dosages_on_medicine_id" ON "dosages" ("medicine_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_dosages_on_visit_id" ON "dosages" ("visit_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "dosages" ("id","visit_id","medicine_id","units_given","discount")
+                     SELECT "id","visit_id","medicine_id","units_given","discount" FROM "adosages"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "adosages"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "adosages" ("id" integer NOT NULL PRIMARY KEY, "visit_id" integer DEFAULT NULL, "medicine_id" integer DEFAULT NULL, "units_given" integer DEFAULT NULL, "discount" float DEFAULT 0.0)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_adosages_on_visit_id" ON "adosages" ("visit_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_adosages_on_medicine_id" ON "adosages" ("medicine_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "adosages" ("id","visit_id","medicine_id","units_given","discount")
+                     SELECT "id","visit_id","medicine_id","units_given","discount" FROM "dosages"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "dosages"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "dosages" ("id" integer NOT NULL PRIMARY KEY, "visit_id" integer DEFAULT NULL, "medicine_id" integer DEFAULT NULL, "units_given" integer DEFAULT NULL, "discount" float DEFAULT 0.0, CONSTRAINT "fk_rails_fc9bbcef74"
+FOREIGN KEY ("medicine_id")
+  REFERENCES "medicines" ("id")
+, CONSTRAINT "fk_rails_c1782f7c8a"
+FOREIGN KEY ("visit_id")
+  REFERENCES "visits" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_dosages_on_medicine_id" ON "dosages" ("medicine_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_dosages_on_visit_id" ON "dosages" ("visit_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "dosages" ("id","visit_id","medicine_id","units_given","discount")
+                     SELECT "id","visit_id","medicine_id","units_given","discount" FROM "adosages"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "adosages"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "amedicine_costs" ("id" integer NOT NULL PRIMARY KEY, "medicine_id" integer DEFAULT NULL, "cost_per_unit" integer DEFAULT NULL, "start_date" date DEFAULT NULL, "end_date" date DEFAULT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_amedicine_costs_on_medicine_id" ON "amedicine_costs" ("medicine_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "amedicine_costs" ("id","medicine_id","cost_per_unit","start_date","end_date")
+                     SELECT "id","medicine_id","cost_per_unit","start_date","end_date" FROM "medicine_costs"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "medicine_costs"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "medicine_costs" ("id" integer NOT NULL PRIMARY KEY, "medicine_id" integer DEFAULT NULL, "cost_per_unit" integer DEFAULT NULL, "start_date" date DEFAULT NULL, "end_date" date DEFAULT NULL, CONSTRAINT "fk_rails_46a2f884cf"
+FOREIGN KEY ("medicine_id")
+  REFERENCES "medicines" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_medicine_costs_on_medicine_id" ON "medicine_costs" ("medicine_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "medicine_costs" ("id","medicine_id","cost_per_unit","start_date","end_date")
+                     SELECT "id","medicine_id","cost_per_unit","start_date","end_date" FROM "amedicine_costs"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "amedicine_costs"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "anotes" ("id" integer NOT NULL PRIMARY KEY, "notable_type" varchar DEFAULT NULL, "notable_id" integer DEFAULT NULL, "title" varchar DEFAULT NULL, "content" text DEFAULT NULL, "user_id" integer DEFAULT NULL, "written_on" datetime DEFAULT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_anotes_on_user_id" ON "anotes" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "anotes" ("id","notable_type","notable_id","title","content","user_id","written_on")
+                     SELECT "id","notable_type","notable_id","title","content","user_id","written_on" FROM "notes"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "notes"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "notes" ("id" integer NOT NULL PRIMARY KEY, "notable_type" varchar DEFAULT NULL, "notable_id" integer DEFAULT NULL, "title" varchar DEFAULT NULL, "content" text DEFAULT NULL, "user_id" integer DEFAULT NULL, "written_on" datetime DEFAULT NULL, CONSTRAINT "fk_rails_7f2323ad43"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_notes_on_user_id" ON "notes" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "notes" ("id","notable_type","notable_id","title","content","user_id","written_on")
+                     SELECT "id","notable_type","notable_id","title","content","user_id","written_on" FROM "anotes"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "anotes"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "apets" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "animal_id" integer DEFAULT NULL, "owner_id" integer DEFAULT NULL, "female" boolean DEFAULT NULL, "date_of_birth" date DEFAULT NULL, "active" boolean DEFAULT 1)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_apets_on_owner_id" ON "apets" ("owner_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_apets_on_animal_id" ON "apets" ("animal_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "apets" ("id","name","animal_id","owner_id","female","date_of_birth","active")
+                     SELECT "id","name","animal_id","owner_id","female","date_of_birth","active" FROM "pets"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "pets"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "pets" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "animal_id" integer DEFAULT NULL, "owner_id" integer DEFAULT NULL, "female" boolean DEFAULT NULL, "date_of_birth" date DEFAULT NULL, "active" boolean DEFAULT 1, CONSTRAINT "fk_rails_04b7f57991"
+FOREIGN KEY ("animal_id")
+  REFERENCES "animals" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_pets_on_animal_id" ON "pets" ("animal_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_pets_on_owner_id" ON "pets" ("owner_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "pets" ("id","name","animal_id","owner_id","female","date_of_birth","active")
+                     SELECT "id","name","animal_id","owner_id","female","date_of_birth","active" FROM "apets"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "apets"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "apets" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "animal_id" integer DEFAULT NULL, "owner_id" integer DEFAULT NULL, "female" boolean DEFAULT NULL, "date_of_birth" date DEFAULT NULL, "active" boolean DEFAULT 1)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_apets_on_owner_id" ON "apets" ("owner_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_apets_on_animal_id" ON "apets" ("animal_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "apets" ("id","name","animal_id","owner_id","female","date_of_birth","active")
+                     SELECT "id","name","animal_id","owner_id","female","date_of_birth","active" FROM "pets"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "pets"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "pets" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "animal_id" integer DEFAULT NULL, "owner_id" integer DEFAULT NULL, "female" boolean DEFAULT NULL, "date_of_birth" date DEFAULT NULL, "active" boolean DEFAULT 1, CONSTRAINT "fk_rails_04b7f57991"
+FOREIGN KEY ("animal_id")
+  REFERENCES "animals" ("id")
+, CONSTRAINT "fk_rails_1ff5d16ccb"
+FOREIGN KEY ("owner_id")
+  REFERENCES "owners" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_pets_on_animal_id" ON "pets" ("animal_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_pets_on_owner_id" ON "pets" ("owner_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "pets" ("id","name","animal_id","owner_id","female","date_of_birth","active")
+                     SELECT "id","name","animal_id","owner_id","female","date_of_birth","active" FROM "apets"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "apets"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aprocedure_costs" ("id" integer NOT NULL PRIMARY KEY, "procedure_id" integer DEFAULT NULL, "cost" integer DEFAULT NULL, "start_date" date DEFAULT NULL, "end_date" date DEFAULT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_aprocedure_costs_on_procedure_id" ON "aprocedure_costs" ("procedure_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aprocedure_costs" ("id","procedure_id","cost","start_date","end_date")
+                     SELECT "id","procedure_id","cost","start_date","end_date" FROM "procedure_costs"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "procedure_costs"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "procedure_costs" ("id" integer NOT NULL PRIMARY KEY, "procedure_id" integer DEFAULT NULL, "cost" integer DEFAULT NULL, "start_date" date DEFAULT NULL, "end_date" date DEFAULT NULL, CONSTRAINT "fk_rails_0f2318a7c9"
+FOREIGN KEY ("procedure_id")
+  REFERENCES "procedures" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_procedure_costs_on_procedure_id" ON "procedure_costs" ("procedure_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "procedure_costs" ("id","procedure_id","cost","start_date","end_date")
+                     SELECT "id","procedure_id","cost","start_date","end_date" FROM "aprocedure_costs"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "aprocedure_costs"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atreatments" ("id" integer NOT NULL PRIMARY KEY, "visit_id" integer DEFAULT NULL, "procedure_id" integer DEFAULT NULL, "successful" boolean DEFAULT NULL, "discount" float DEFAULT 0.0)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_atreatments_on_visit_id" ON "atreatments" ("visit_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_atreatments_on_procedure_id" ON "atreatments" ("procedure_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "atreatments" ("id","visit_id","procedure_id","successful","discount")
+                     SELECT "id","visit_id","procedure_id","successful","discount" FROM "treatments"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "treatments"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "treatments" ("id" integer NOT NULL PRIMARY KEY, "visit_id" integer DEFAULT NULL, "procedure_id" integer DEFAULT NULL, "successful" boolean DEFAULT NULL, "discount" float DEFAULT 0.0, CONSTRAINT "fk_rails_36ad4869f1"
+FOREIGN KEY ("procedure_id")
+  REFERENCES "procedures" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_treatments_on_procedure_id" ON "treatments" ("procedure_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_treatments_on_visit_id" ON "treatments" ("visit_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "treatments" ("id","visit_id","procedure_id","successful","discount")
+                     SELECT "id","visit_id","procedure_id","successful","discount" FROM "atreatments"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "atreatments"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atreatments" ("id" integer NOT NULL PRIMARY KEY, "visit_id" integer DEFAULT NULL, "procedure_id" integer DEFAULT NULL, "successful" boolean DEFAULT NULL, "discount" float DEFAULT 0.0)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_atreatments_on_visit_id" ON "atreatments" ("visit_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_atreatments_on_procedure_id" ON "atreatments" ("procedure_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "atreatments" ("id","visit_id","procedure_id","successful","discount")
+                     SELECT "id","visit_id","procedure_id","successful","discount" FROM "treatments"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "treatments"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "treatments" ("id" integer NOT NULL PRIMARY KEY, "visit_id" integer DEFAULT NULL, "procedure_id" integer DEFAULT NULL, "successful" boolean DEFAULT NULL, "discount" float DEFAULT 0.0, CONSTRAINT "fk_rails_36ad4869f1"
+FOREIGN KEY ("procedure_id")
+  REFERENCES "procedures" ("id")
+, CONSTRAINT "fk_rails_9c6a39c9be"
+FOREIGN KEY ("visit_id")
+  REFERENCES "visits" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_treatments_on_procedure_id" ON "treatments" ("procedure_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_treatments_on_visit_id" ON "treatments" ("visit_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "treatments" ("id","visit_id","procedure_id","successful","discount")
+                     SELECT "id","visit_id","procedure_id","successful","discount" FROM "atreatments"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "atreatments"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "avisits" ("id" integer NOT NULL PRIMARY KEY, "pet_id" integer DEFAULT NULL, "date" date DEFAULT NULL, "weight" float DEFAULT NULL, "overnight_stay" boolean DEFAULT NULL, "total_charge" integer DEFAULT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_avisits_on_pet_id" ON "avisits" ("pet_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "avisits" ("id","pet_id","date","weight","overnight_stay","total_charge")
+                     SELECT "id","pet_id","date","weight","overnight_stay","total_charge" FROM "visits"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "visits"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "visits" ("id" integer NOT NULL PRIMARY KEY, "pet_id" integer DEFAULT NULL, "date" date DEFAULT NULL, "weight" float DEFAULT NULL, "overnight_stay" boolean DEFAULT NULL, "total_charge" integer DEFAULT NULL, CONSTRAINT "fk_rails_85af856847"
+FOREIGN KEY ("pet_id")
+  REFERENCES "pets" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_visits_on_pet_id" ON "visits" ("pet_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "visits" ("id","pet_id","date","weight","overnight_stay","total_charge")
+                     SELECT "id","pet_id","date","weight","overnight_stay","total_charge" FROM "avisits"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "avisits"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20221130023435)[0m
+  [1m[35m (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20161215030325),
+(20161215032038),
+(20171229220645),
+(20171230021315),
+(20171230021624),
+(20171230021745),
+(20171230021850),
+(20171230022308),
+(20171230022401),
+(20171230022518),
+(20171230023107),
+(20171230023304),
+(20171230023340),
+(20171230024904),
+(20180102204046),
+(20180320013952),
+(20221130023434);
+
+[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "test"], ["created_at", "2023-02-15 06:12:59.949699"], ["updated_at", "2023-02-15 06:12:59.949699"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "schema_sha1"], ["value", "0128c74440da188a27d2cf0068be6821e5ba534b"], ["created_at", "2023-02-15 06:12:59.958518"], ["updated_at", "2023-02-15 06:12:59.958518"]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+---------------------------------------------------------------------
+OwnerTest: test_: Owner should allow :email to be ‹"fred@fred.com"›. 
+---------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+---------------------------------------------------------------------------------------------
+OwnerTest: test_: Creating three owners should show that all factories are properly created. 
+---------------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "alex"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Alex"], ["last_name", "Heimann"], ["role", 3], ["username", "alex"], ["password_digest", "$2a$04$aFUydkdP0.S8Czc.k4K2eutjZROUYondXFknSZKHCu0eWvtm1yF9u"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "rachel"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Rachel"], ["last_name", "Heimann"], ["role", 3], ["username", "rachel"], ["password_digest", "$2a$04$HMRSRjdBmIm3OvlqLsezw.3oluX97pkSAK4PP.AsZeLaZ1X9Z6FQO"], ["active", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "mark"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Mark"], ["last_name", "Heimann"], ["role", 3], ["username", "mark"], ["password_digest", "$2a$04$TEC7noNNl5b3NowzsscSruIAC7Dz/uteG/oeIawmFHD5rynvPedqq"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.1ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Alex"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "6428443731"], ["email", "alex.heimann@example.com"], ["active", 1], ["user_id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.0ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Rachel"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "8196782720"], ["email", "rachel.heimann@example.com"], ["active", 0], ["user_id", 2]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.0ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Mark"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "4122688211"], ["email", "mark.heimann@example.com"], ["active", 1], ["user_id", 3]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mOwner Destroy (0.0ms)[0m  [1m[31mDELETE FROM "owners" WHERE "owners"."id" = ?[0m  [["id", 2]]
+  [1m[36mOwner Destroy (0.1ms)[0m  [1m[31mDELETE FROM "owners" WHERE "owners"."id" = ?[0m  [["id", 3]]
+  [1m[36mOwner Destroy (0.0ms)[0m  [1m[31mDELETE FROM "owners" WHERE "owners"."id" = ?[0m  [["id", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+---------------------------------------------------------------
+OwnerTest: test_: Owner should not allow :state to be ‹"bad"›. 
+---------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+-----------------------------------------------
+OwnerTest: test_: Owner should have many pets. 
+-----------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+------------------------------------------------------------------------
+OwnerTest: test_: Owner should not allow :email to be ‹"fred@fred.uk"›. 
+------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+------------------------------------------------------------------------
+OwnerTest: test_: Owner should allow :email to be ‹"my.fred@fred.net"›. 
+------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------------------------------------------------------------
+OwnerTest: test_: Creating three owners should reactive user if owner is made active. 
+--------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "alex"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Alex"], ["last_name", "Heimann"], ["role", 3], ["username", "alex"], ["password_digest", "$2a$04$8V0FVs10uudEwzpnfK5psu.SvarM.3AFXRacgFuxcAvfj2Ok/.1ZG"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "rachel"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Rachel"], ["last_name", "Heimann"], ["role", 3], ["username", "rachel"], ["password_digest", "$2a$04$Vom/VELIzHumS3M/r4930uUH5vxN7mbmF1.kKnqdli69tRIXCfBgm"], ["active", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "mark"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Mark"], ["last_name", "Heimann"], ["role", 3], ["username", "mark"], ["password_digest", "$2a$04$yLVIMVKbO/nBDFrh2iT1TuhocFApTyIgoRplHPB58kBRjxnmcpuWG"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.0ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Alex"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "2049733395"], ["email", "alex.heimann@example.com"], ["active", 1], ["user_id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.0ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Rachel"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "9941939768"], ["email", "rachel.heimann@example.com"], ["active", 0], ["user_id", 2]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.0ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Mark"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "4122688211"], ["email", "mark.heimann@example.com"], ["active", 1], ["user_id", 3]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) AND "users"."id" != ? LIMIT ?[0m  [["username", "rachel"], ["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Update (0.0ms)[0m  [1m[33mUPDATE "users" SET "active" = ? WHERE "users"."id" = ?[0m  [["active", 1], ["id", 2]]
+  [1m[36mOwner Update (0.0ms)[0m  [1m[33mUPDATE "owners" SET "active" = ? WHERE "owners"."id" = ?[0m  [["active", 1], ["id", 2]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mOwner Load (0.0ms)[0m  [1m[34mSELECT "owners".* FROM "owners" WHERE "owners"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mOwner Destroy (0.0ms)[0m  [1m[31mDELETE FROM "owners" WHERE "owners"."id" = ?[0m  [["id", 2]]
+  [1m[36mOwner Destroy (0.0ms)[0m  [1m[31mDELETE FROM "owners" WHERE "owners"."id" = ?[0m  [["id", 3]]
+  [1m[36mOwner Destroy (0.0ms)[0m  [1m[31mDELETE FROM "owners" WHERE "owners"."id" = ?[0m  [["id", 1]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+-------------------------------------------------------------------------
+OwnerTest: test_: Owner should not allow :email to be ‹"fred@fred.con"›. 
+-------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------------------------------------------------------
+OwnerTest: test_: Owner should validate that :first_name cannot be empty/falsy. 
+--------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------------------------------------
+OwnerTest: test_: Owner should not allow :zip to be ‹"3431"›. 
+--------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------------------------------------
+OwnerTest: test_: Owner should not allow :state to be ‹"CA"›. 
+--------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+------------------------------------------------------------------------------------
+OwnerTest: test_: Creating three owners should shows that proper_name method works. 
+------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "alex"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Alex"], ["last_name", "Heimann"], ["role", 3], ["username", "alex"], ["password_digest", "$2a$04$jGGEBl6I9JfxYFTtHBvL9./VJV0iW6aGcnwlpsI1uDSidOcS2N/sy"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "rachel"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Rachel"], ["last_name", "Heimann"], ["role", 3], ["username", "rachel"], ["password_digest", "$2a$04$MLW.SL5VDaxOuOv3kT2C2.B4Y1d2yTclPxSLYirrmAtMYUnjJod1i"], ["active", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "mark"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Mark"], ["last_name", "Heimann"], ["role", 3], ["username", "mark"], ["password_digest", "$2a$04$R2apu2sZPmvIFERlOGswuuJ9I7R5Jsu62vWwbOsSevm3e4lfdw7Je"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.0ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Alex"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "0678041833"], ["email", "alex.heimann@example.com"], ["active", 1], ["user_id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.0ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Rachel"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "7166866314"], ["email", "rachel.heimann@example.com"], ["active", 0], ["user_id", 2]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.0ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Mark"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "4122688211"], ["email", "mark.heimann@example.com"], ["active", 1], ["user_id", 3]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mOwner Destroy (0.0ms)[0m  [1m[31mDELETE FROM "owners" WHERE "owners"."id" = ?[0m  [["id", 2]]
+  [1m[36mOwner Destroy (0.0ms)[0m  [1m[31mDELETE FROM "owners" WHERE "owners"."id" = ?[0m  [["id", 3]]
+  [1m[36mOwner Destroy (0.0ms)[0m  [1m[31mDELETE FROM "owners" WHERE "owners"."id" = ?[0m  [["id", 1]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+------------------------------------------------------------------------
+OwnerTest: test_: Owner should allow :email to be ‹"fred123@fred.gov"›. 
+------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+------------------------------------------------------------
+OwnerTest: test_: Owner should not allow :state to be ‹10›. 
+------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+-------------------------------------------------------------------
+OwnerTest: test_: Owner should not allow :phone to be ‹"2683259"›. 
+-------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------------------------------------------
+OwnerTest: test_: Owner should not allow :zip to be ‹"15213-9843"›. 
+--------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------------------------------------------------
+OwnerTest: test_: Owner should not allow :phone to be ‹"4122683259x224"›. 
+--------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+----------------------------------------------------------
+OwnerTest: test_: Owner should allow :state to be ‹"WV"›. 
+----------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+------------------------------------------------------------------------
+OwnerTest: test_: Owner should not allow :phone to be ‹"412-2683-259"›. 
+------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+-----------------------------------------------------------
+OwnerTest: test_: Owner should allow :zip to be ‹"15217"›. 
+-----------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+-----------------------------------------------------------------------------
+OwnerTest: test_: Creating three owners should shows that name method works. 
+-----------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "alex"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Alex"], ["last_name", "Heimann"], ["role", 3], ["username", "alex"], ["password_digest", "$2a$04$coKhtCekmpiqbowPEfuUtedN/zdS/YrVQWLQa3xlfLc3zKQ.DuW2G"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "rachel"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Rachel"], ["last_name", "Heimann"], ["role", 3], ["username", "rachel"], ["password_digest", "$2a$04$uPYPlAIFg1xDiu9VHmv0weeAz3/QhMjHVwV68bGac.gCMfmK9JOzG"], ["active", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "mark"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Mark"], ["last_name", "Heimann"], ["role", 3], ["username", "mark"], ["password_digest", "$2a$04$QwCrGvnkjPjl.5lKfKpX6u31uE/1SJsBtAcA2FWqoY0zyRibX7OUa"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.0ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Alex"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "7398247366"], ["email", "alex.heimann@example.com"], ["active", 1], ["user_id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.0ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Rachel"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "8524784846"], ["email", "rachel.heimann@example.com"], ["active", 0], ["user_id", 2]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.0ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Mark"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "4122688211"], ["email", "mark.heimann@example.com"], ["active", 1], ["user_id", 3]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mOwner Destroy (0.0ms)[0m  [1m[31mDELETE FROM "owners" WHERE "owners"."id" = ?[0m  [["id", 2]]
+  [1m[36mOwner Destroy (0.0ms)[0m  [1m[31mDELETE FROM "owners" WHERE "owners"."id" = ?[0m  [["id", 3]]
+  [1m[36mOwner Destroy (0.0ms)[0m  [1m[31mDELETE FROM "owners" WHERE "owners"."id" = ?[0m  [["id", 1]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+---------------------------------------------------------------------------
+OwnerTest: test_: Owner should validate that :email cannot be empty/falsy. 
+---------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+-----------------------------------------------------------
+OwnerTest: test_: Owner should allow :zip to be ‹"15090"›. 
+-----------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+---------------------------------------------------------------------------
+OwnerTest: test_: Owner should validate that :phone cannot be empty/falsy. 
+---------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+----------------------------------------------------------------------------
+OwnerTest: test_: Owner should not allow :email to be ‹"my fred@fred.com"›. 
+----------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+------------------------------------------------------------------------
+OwnerTest: test_: Owner should not allow :phone to be ‹"412/268/3259"›. 
+------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+---------------------------------------------------------------------------------------
+OwnerTest: test_: Creating three owners should shows that there are two active owners. 
+---------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "alex"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Alex"], ["last_name", "Heimann"], ["role", 3], ["username", "alex"], ["password_digest", "$2a$04$heAl9fBJS8r1FAlFSL/29O5vlgkrCZf.rHEcdMJwh5C2Igfakwnvy"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "rachel"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Rachel"], ["last_name", "Heimann"], ["role", 3], ["username", "rachel"], ["password_digest", "$2a$04$fDXPVIo2azsHRUWderYgDO/U4Ep767pcVZcs8S0H7avwC0j.lOyXy"], ["active", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "mark"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Mark"], ["last_name", "Heimann"], ["role", 3], ["username", "mark"], ["password_digest", "$2a$04$cMNXH9p1qnG/yBmKRvYaTuwgMGF5Yoifq8IiaGxzau4Jaomz1rwe6"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.0ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Alex"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "9806944123"], ["email", "alex.heimann@example.com"], ["active", 1], ["user_id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.0ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Rachel"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "1191939229"], ["email", "rachel.heimann@example.com"], ["active", 0], ["user_id", 2]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.0ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Mark"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "4122688211"], ["email", "mark.heimann@example.com"], ["active", 1], ["user_id", 3]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mOwner Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "owners" WHERE "owners"."active" = ?[0m  [["active", 1]]
+  [1m[36mOwner Load (0.0ms)[0m  [1m[34mSELECT "owners".* FROM "owners" WHERE "owners"."active" = ?[0m  [["active", 1]]
+  [1m[36mOwner Destroy (0.0ms)[0m  [1m[31mDELETE FROM "owners" WHERE "owners"."id" = ?[0m  [["id", 2]]
+  [1m[36mOwner Destroy (0.0ms)[0m  [1m[31mDELETE FROM "owners" WHERE "owners"."id" = ?[0m  [["id", 3]]
+  [1m[36mOwner Destroy (0.0ms)[0m  [1m[31mDELETE FROM "owners" WHERE "owners"."id" = ?[0m  [["id", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+-------------------------------------------------------------------------------
+OwnerTest: test_: Owner should validate that :last_name cannot be empty/falsy. 
+-------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+------------------------------------------------------------------------
+OwnerTest: test_: Owner should not allow :phone to be ‹"800-EAT-FOOD"›. 
+------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+-------------------------------------------------------------------------------------------------------------------------
+OwnerTest: test_: Creating three owners should shows that search for owner by either (part of) last or first name works. 
+-------------------------------------------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "alex"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Alex"], ["last_name", "Heimann"], ["role", 3], ["username", "alex"], ["password_digest", "$2a$04$KVBQM1qc7unnFQl9M5sZzOMNdV2UMA8qNsd1VlfSA0Uh6jy/2pS1W"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "rachel"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Rachel"], ["last_name", "Heimann"], ["role", 3], ["username", "rachel"], ["password_digest", "$2a$04$3Z0R.h2iJ0DhQICNid7UWerNvZTVGQt4acKmaqA6zmeeTpWUuUgoy"], ["active", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "mark"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Mark"], ["last_name", "Heimann"], ["role", 3], ["username", "mark"], ["password_digest", "$2a$04$XO0RPGaq.Tbpd21w/8ZtEunl7Xb8bOL9ZOsuRzPC1ugumG7UbavzW"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.0ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Alex"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "3912014204"], ["email", "alex.heimann@example.com"], ["active", 1], ["user_id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.0ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Rachel"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "2260993369"], ["email", "rachel.heimann@example.com"], ["active", 0], ["user_id", 2]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.0ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Mark"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "4122688211"], ["email", "mark.heimann@example.com"], ["active", 1], ["user_id", 3]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mOwner Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "owners" WHERE (first_name LIKE 'Hei%' OR last_name LIKE 'Hei%')[0m
+  [1m[36mOwner Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "owners" WHERE (first_name LIKE 'Mark%' OR last_name LIKE 'Mark%')[0m
+  [1m[36mOwner Destroy (0.0ms)[0m  [1m[31mDELETE FROM "owners" WHERE "owners"."id" = ?[0m  [["id", 2]]
+  [1m[36mOwner Destroy (0.0ms)[0m  [1m[31mDELETE FROM "owners" WHERE "owners"."id" = ?[0m  [["id", 3]]
+  [1m[36mOwner Destroy (0.0ms)[0m  [1m[31mDELETE FROM "owners" WHERE "owners"."id" = ?[0m  [["id", 1]]
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+----------------------------------------------------------------------------------------
+OwnerTest: test_: Creating three owners should shows that there is one inactive owners. 
+----------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "alex"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Alex"], ["last_name", "Heimann"], ["role", 3], ["username", "alex"], ["password_digest", "$2a$04$ao2GEunW2zUHhbYpU5nkCOakEEB7Wp.Pw9Y8oDpjemnIvOSC06YlO"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "rachel"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Rachel"], ["last_name", "Heimann"], ["role", 3], ["username", "rachel"], ["password_digest", "$2a$04$pNWO6ICneuEQsAOUz1ouyOwTZDHkUN/A3CvEFufAx99cbUYOFuQYi"], ["active", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "mark"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Mark"], ["last_name", "Heimann"], ["role", 3], ["username", "mark"], ["password_digest", "$2a$04$CgpOk1/kIEQEjOWDnPtjAu2q31HdYF.Xxap57FsIF1rasecc/cWk."], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.0ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Alex"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "2401510370"], ["email", "alex.heimann@example.com"], ["active", 1], ["user_id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.0ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Rachel"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "7591767725"], ["email", "rachel.heimann@example.com"], ["active", 0], ["user_id", 2]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.0ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Mark"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "4122688211"], ["email", "mark.heimann@example.com"], ["active", 1], ["user_id", 3]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mOwner Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "owners" WHERE "owners"."active" != ?[0m  [["active", 1]]
+  [1m[36mOwner Load (0.0ms)[0m  [1m[34mSELECT "owners".* FROM "owners" WHERE "owners"."active" != ?[0m  [["active", 1]]
+  [1m[36mOwner Destroy (0.0ms)[0m  [1m[31mDELETE FROM "owners" WHERE "owners"."id" = ?[0m  [["id", 2]]
+  [1m[36mOwner Destroy (0.0ms)[0m  [1m[31mDELETE FROM "owners" WHERE "owners"."id" = ?[0m  [["id", 3]]
+  [1m[36mOwner Destroy (0.0ms)[0m  [1m[31mDELETE FROM "owners" WHERE "owners"."id" = ?[0m  [["id", 1]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------------------------------------------
+OwnerTest: test_: Owner should allow :phone to be ‹"412.268.3259"›. 
+--------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+------------------------------------------------------------------
+OwnerTest: test_: Owner should allow :phone to be ‹"4122683259"›. 
+------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+-----------------------------------------------------------------------------------------------------------
+OwnerTest: test_: Creating three owners should shows that there are three owners in in alphabetical order. 
+-----------------------------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "alex"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Alex"], ["last_name", "Heimann"], ["role", 3], ["username", "alex"], ["password_digest", "$2a$04$UrFHbT1YGJLzwGWLbq73meNdAbU4gC5PXrVMMSCqNqP4F69yJOBGu"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "rachel"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Rachel"], ["last_name", "Heimann"], ["role", 3], ["username", "rachel"], ["password_digest", "$2a$04$Io/PQjc08kKMy7y5UvzKg.w.CWAA46ipkf1xY.KpbUbPMDVCKL8MW"], ["active", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "mark"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Mark"], ["last_name", "Heimann"], ["role", 3], ["username", "mark"], ["password_digest", "$2a$04$7L5khs8lh8lQbthml4ceDuuCDJUoMkV1bmA30MM3qygBIjAKKPaGy"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.0ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Alex"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "1634301898"], ["email", "alex.heimann@example.com"], ["active", 1], ["user_id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.0ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Rachel"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "5790589639"], ["email", "rachel.heimann@example.com"], ["active", 0], ["user_id", 2]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.0ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Mark"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "4122688211"], ["email", "mark.heimann@example.com"], ["active", 1], ["user_id", 3]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mOwner Load (0.1ms)[0m  [1m[34mSELECT "owners".* FROM "owners" ORDER BY last_name, first_name[0m
+  [1m[36mOwner Destroy (0.0ms)[0m  [1m[31mDELETE FROM "owners" WHERE "owners"."id" = ?[0m  [["id", 2]]
+  [1m[36mOwner Destroy (0.0ms)[0m  [1m[31mDELETE FROM "owners" WHERE "owners"."id" = ?[0m  [["id", 3]]
+  [1m[36mOwner Destroy (0.0ms)[0m  [1m[31mDELETE FROM "owners" WHERE "owners"."id" = ?[0m  [["id", 1]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------------------------------------
+OwnerTest: test_: Owner should have many visits through pets. 
+--------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+----------------------------------------------------------
+OwnerTest: test_: Owner should allow :state to be ‹"OH"›. 
+----------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+------------------------------------------------------------------------
+OwnerTest: test_: Owner should allow :email to be ‹"my_fred@fred.org"›. 
+------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------------------------------------
+OwnerTest: test_: Owner should not allow :zip to be ‹"fred"›. 
+--------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+-------------------------------------------------------------------------
+OwnerTest: test_: Owner should not allow :email to be ‹"fred@fred,com"›. 
+-------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+----------------------------------------------------------------
+OwnerTest: test_: Owner should not allow :email to be ‹"fred"›. 
+----------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+-----------------------------------------------------------
+OwnerTest: test_: Owner should allow :zip to be ‹"03431"›. 
+-----------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+----------------------------------------------------------------------
+OwnerTest: test_: Owner should allow :phone to be ‹"(412) 268-3259"›. 
+----------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+----------------------------------------------------------
+OwnerTest: test_: Owner should allow :state to be ‹"PA"›. 
+----------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------------------------------------------------------------------------
+OwnerTest: test_: Creating three owners should shows that Mark's phone is stripped of non-digits. 
+--------------------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "alex"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Alex"], ["last_name", "Heimann"], ["role", 3], ["username", "alex"], ["password_digest", "$2a$04$3OPz.DEurOgaxAHA.a3MkeDtbfPfLAqTED51X6Jd94fF3N24Lrx.i"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "rachel"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Rachel"], ["last_name", "Heimann"], ["role", 3], ["username", "rachel"], ["password_digest", "$2a$04$ErNdYxklrJpvraml0.KiOuY9Li3wY6dS51CbsswuhJCjNbIgmxRcy"], ["active", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "mark"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Mark"], ["last_name", "Heimann"], ["role", 3], ["username", "mark"], ["password_digest", "$2a$04$Eth43.VHmZuOcjjjvyhUDu5TFEBUXq1GZ7/HpnnlVKpuAY5BRdZ9K"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.0ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Alex"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "3850818365"], ["email", "alex.heimann@example.com"], ["active", 1], ["user_id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.0ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Rachel"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "9546162871"], ["email", "rachel.heimann@example.com"], ["active", 0], ["user_id", 2]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.0ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Mark"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "4122688211"], ["email", "mark.heimann@example.com"], ["active", 1], ["user_id", 3]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mOwner Destroy (0.0ms)[0m  [1m[31mDELETE FROM "owners" WHERE "owners"."id" = ?[0m  [["id", 2]]
+  [1m[36mOwner Destroy (0.0ms)[0m  [1m[31mDELETE FROM "owners" WHERE "owners"."id" = ?[0m  [["id", 3]]
+  [1m[36mOwner Destroy (0.0ms)[0m  [1m[31mDELETE FROM "owners" WHERE "owners"."id" = ?[0m  [["id", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------------------------------------------
+OwnerTest: test_: Owner should allow :phone to be ‹"412-268-3259"›. 
+--------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+---------------------------------------------------------------------------
+OwnerTest: test_: Owner should allow :email to be ‹"fred@andrew.cmu.edu"›. 
+---------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+---------------------------------------------------------------
+OwnerTest: test_: Owner should not allow :zip to be ‹"15d32"›. 
+---------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+------------------------------------------------------------------------------------
+UserTest: test_: User should have a secure password, defined on password attribute. 
+------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+-------------------------------------------------------------------------
+UserTest: test_: Within context should require a password for new users. 
+-------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "jordan"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Jordan"], ["last_name", "Stapinski"], ["role", 1], ["username", "jordan"], ["password_digest", "$2a$04$M0J//X4y22fwfRL/CTgyv.c51xhwAfyjDIRxiIOd/YmrraxfUUs4K"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "becca"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Becca"], ["last_name", "Kern"], ["role", 1], ["username", "becca"], ["password_digest", "$2a$04$MIQFyfomVsKaVfbJjtW73.HYR.tNlW7WrwHiaFr7dFmHHfMGx.4HG"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "connor"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Connor"], ["last_name", "Hanley"], ["role", 1], ["username", "connor"], ["password_digest", "$2a$04$Znoq0uCjE63loakVVD2EOe/3XMT8SjYXbsZqHDtjw2VrpUaLC3PYm"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "tank"], ["LIMIT", 1]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 1]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 2]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 3]]
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+----------------------------------------------------------
+UserTest: test_: User should allow :role to be ‹"owner"›. 
+----------------------------------------------------------
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+---------------------------------------------------------------------------------------
+UserTest: test_: Within context should require passwords to be confirmed and matching. 
+---------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "jordan"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Jordan"], ["last_name", "Stapinski"], ["role", 1], ["username", "jordan"], ["password_digest", "$2a$04$QX9ht.eFFYRjX2CLWYSkguEoFwZKa.BcbI579N16g7eoz5IyV6mLK"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "becca"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Becca"], ["last_name", "Kern"], ["role", 1], ["username", "becca"], ["password_digest", "$2a$04$sgSFuAhSk437B9jIBXOswO5X9eGyaN6mF7f/S68LIkTDSlHt9esku"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "connor"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Connor"], ["last_name", "Hanley"], ["role", 1], ["username", "connor"], ["password_digest", "$2a$04$OtzJFe/BExx680YmQgWeJOFKggMNL28/v5CxsKKTik54ZPuzduCGi"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "tank"], ["LIMIT", 1]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 1]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 2]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 3]]
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+-----------------------------------------------------------------------------------------
+UserTest: test_: Within context should require passwords to be at least four characters. 
+-----------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "jordan"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Jordan"], ["last_name", "Stapinski"], ["role", 1], ["username", "jordan"], ["password_digest", "$2a$04$6I0IeY7Apn1v2NnL5g1Tc.cuQ/JvVLpIZyiF41P4K.yYA/ZS/oNbq"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "becca"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Becca"], ["last_name", "Kern"], ["role", 1], ["username", "becca"], ["password_digest", "$2a$04$x0GMLdUYKlBG3HgN3341RunxhDbwwzEYbqYiuVa.WgNKIc5KJJrH2"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "connor"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Connor"], ["last_name", "Hanley"], ["role", 1], ["username", "connor"], ["password_digest", "$2a$04$7U3Sc./yWihXZVoABUAxqOjsXlgTwdCy72.YgwO5yRUAbTcd7vYPO"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "tank"], ["LIMIT", 1]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 1]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 2]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 3]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+----------------------------------------------------------------------------
+UserTest: test_: User should validate that :username cannot be empty/falsy. 
+----------------------------------------------------------------------------
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", ""], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------------------------------------------
+UserTest: test_: Within context should have name methods for users. 
+--------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "jordan"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Jordan"], ["last_name", "Stapinski"], ["role", 1], ["username", "jordan"], ["password_digest", "$2a$04$2nHau9jyyLQrzRCfPJayWeNn.jvpka0t/gMk3icAou.bOh/ZVkvHq"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "becca"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Becca"], ["last_name", "Kern"], ["role", 1], ["username", "becca"], ["password_digest", "$2a$04$Y00ApW9TNWRmyE8xHVZqjObdJ7bzcQa1ARcc6CRtp3UmnmNjkmI4K"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "connor"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Connor"], ["last_name", "Hanley"], ["role", 1], ["username", "connor"], ["password_digest", "$2a$04$xbPQT12RTiAYQ1NNZ0ZIM.XSmi98.lMJK6EKIRtqMK7LP3IaBFkkS"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 1]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 2]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 3]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+-------------------------------------------------------------------------------------------------
+UserTest: test_: Within context should require users to have unique, case-insensitive usernames. 
+-------------------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "jordan"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Jordan"], ["last_name", "Stapinski"], ["role", 1], ["username", "jordan"], ["password_digest", "$2a$04$iLdvfoAcFQ9LXiJTCNTya.90HUUWhRnCVMFE4E/ZV53bh.XAMX9D."], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "becca"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Becca"], ["last_name", "Kern"], ["role", 1], ["username", "becca"], ["password_digest", "$2a$04$HT77ymEj10kkAX0jqIlNMeC3rCyvfJlorTrgc/bImMQAmw4krLnQq"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "connor"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Connor"], ["last_name", "Hanley"], ["role", 1], ["username", "connor"], ["password_digest", "$2a$04$pbGxHLqDG67WS97mmOvgV.SGy2mczWMR3kc3TvhhIYjcWalYMFmmm"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) AND "users"."id" != ? LIMIT ?[0m  [["username", "BECCA"], ["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 1]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 2]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 3]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+----------------------------------------------------------------------------------------
+UserTest: test_: Within context should have role methods and recognize all three roles. 
+----------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "jordan"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Jordan"], ["last_name", "Stapinski"], ["role", 1], ["username", "jordan"], ["password_digest", "$2a$04$pYde7iUQeC4KDubOVGq7jeLa8h7Qv9NJylXiEPylXxCnBAyPVqTsG"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "becca"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Becca"], ["last_name", "Kern"], ["role", 1], ["username", "becca"], ["password_digest", "$2a$04$xz/ngaoVx1rQVuUyZXynTuqHhaNmJLE5LrY2h5RtQ/73QapwuxTdG"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "connor"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Connor"], ["last_name", "Hanley"], ["role", 1], ["username", "connor"], ["password_digest", "$2a$04$9WhfhAsOrEo./5zEl/EkL.p0vkrrDXz.H.s602t1n6ctdD3pXl12O"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Destroy (0.1ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 1]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 2]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 3]]
+  [1m[36mTRANSACTION (3.2ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+-----------------------------------------------------------------------------------
+UserTest: test_: User should validate that :username is case-insensitively unique. 
+-----------------------------------------------------------------------------------
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", nil], ["last_name", nil], ["role", 3], ["username", nil], ["password_digest", nil], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Update (0.0ms)[0m  [1m[33mUPDATE "users" SET "username" = ? WHERE "users"."id" = ?[0m  [["username", "dummy value"], ["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "dummy value"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "DUMMY VALUE"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------------------------------------
+UserTest: test_: User should allow :role to be ‹"assistant"›. 
+--------------------------------------------------------------
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------------------------------------------------------------------
+UserTest: test_: Within context should have class method to handle authentication services. 
+--------------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "jordan"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Jordan"], ["last_name", "Stapinski"], ["role", 1], ["username", "jordan"], ["password_digest", "$2a$04$UQ7tKVHTx9iKFDB83cQF8.uQEU9ihBfeNCCStls0eHBTkGYjXi50K"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "becca"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Becca"], ["last_name", "Kern"], ["role", 1], ["username", "becca"], ["password_digest", "$2a$04$ZBNKNWAfa2vLOhHkVPahzOiOWaq.M2VgN4aPH2m/CSr/iRC/0nPmi"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "connor"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Connor"], ["last_name", "Hanley"], ["role", 1], ["username", "connor"], ["password_digest", "$2a$04$Hatk5t/tbriGnZi7uWm3Q.hFcleNoqtnN8I7rphL/EZrXhGehrjhm"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "jordan"], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "jordan"], ["LIMIT", 1]]
+  [1m[36mUser Destroy (0.1ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 1]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 2]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 3]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------------------------------
+UserTest: test_: User should allow :role to be ‹"vet"›. 
+--------------------------------------------------------
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+---------------------------------------------------------------------------------
+UserTest: test_: Within context should allow user to authenticate with password. 
+---------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "jordan"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Jordan"], ["last_name", "Stapinski"], ["role", 1], ["username", "jordan"], ["password_digest", "$2a$04$5.lCpD4nyWPu4lutKfshbeO4ipgi3sovnPLEyKUiIr3VgNstsD3nO"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "becca"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Becca"], ["last_name", "Kern"], ["role", 1], ["username", "becca"], ["password_digest", "$2a$04$gk4zREeYujHl8rdhQNJdquT6Kt70JQnIJXAv8.E/.nZOyVkAMIp.G"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "connor"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Connor"], ["last_name", "Hanley"], ["role", 1], ["username", "connor"], ["password_digest", "$2a$04$EZG2bn/PvC5XF5qsTgd7zOo42Zg2nr71Ar9FX2I9B30MBJHuo5LPK"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 1]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 2]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 3]]
+  [1m[36mTRANSACTION (3.7ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------------------------------
+UserTest: test_: User should allow :role to be ‹"vet"›. 
+--------------------------------------------------------
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+----------------------------------------------------------
+UserTest: test_: User should allow :role to be ‹"owner"›. 
+----------------------------------------------------------
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------------------------------------------------------------------
+UserTest: test_: Within context should have class method to handle authentication services. 
+--------------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "jordan"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Jordan"], ["last_name", "Stapinski"], ["role", 1], ["username", "jordan"], ["password_digest", "$2a$04$o1v5ycmlab7E4tFdabRl8ubJaRKMcZARnzvtk9yXwAkAqKelwlVF2"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "becca"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Becca"], ["last_name", "Kern"], ["role", 1], ["username", "becca"], ["password_digest", "$2a$04$95ajbuCu/62jmuiicKJjo.7kvomThowfmLyZqzDWjRMylrQa6/gm2"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "connor"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Connor"], ["last_name", "Hanley"], ["role", 1], ["username", "connor"], ["password_digest", "$2a$04$GmNUS7m/p3rFMih6ivIdW.p0ePxxt6zuRLVgRTMWyvdobMtbbkj1m"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "jordan"], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "jordan"], ["LIMIT", 1]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 1]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 2]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 3]]
+  [1m[36mTRANSACTION (15.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+------------------------------------------------------------------------------------
+UserTest: test_: User should have a secure password, defined on password attribute. 
+------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------------------------------------------
+UserTest: test_: Within context should have name methods for users. 
+--------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "jordan"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Jordan"], ["last_name", "Stapinski"], ["role", 1], ["username", "jordan"], ["password_digest", "$2a$04$l7pVk724QQm6NEyR5kQvp./wT4SbmxF/AVz3gxnbh3/gY2khH9mgG"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "becca"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Becca"], ["last_name", "Kern"], ["role", 1], ["username", "becca"], ["password_digest", "$2a$04$.MtwkJ0ltzd0AS6wxqzQ/Oe2DzaOGYmz8YU.Sskkf2/9yoj4d0Mpy"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "connor"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Connor"], ["last_name", "Hanley"], ["role", 1], ["username", "connor"], ["password_digest", "$2a$04$4coYs6InBezvRRBmW1Jg2e.3imwIYNbTfJDBpQbBjudzxB/jLK7r2"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 1]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 2]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 3]]
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+-------------------------------------------------------------------------------------------------
+UserTest: test_: Within context should require users to have unique, case-insensitive usernames. 
+-------------------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "jordan"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Jordan"], ["last_name", "Stapinski"], ["role", 1], ["username", "jordan"], ["password_digest", "$2a$04$i6EDJWx56ecl9.jaszQk7O24rgG2ngWmjQtCUU4JK9h6PORMYgUtu"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "becca"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Becca"], ["last_name", "Kern"], ["role", 1], ["username", "becca"], ["password_digest", "$2a$04$7tOXcnqHpB7LdjrNuwYJeOZDFSFnLxFfc44V.eWfqP0FF3LTr5Y26"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "connor"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Connor"], ["last_name", "Hanley"], ["role", 1], ["username", "connor"], ["password_digest", "$2a$04$GwTO/UTZTl/v3m4icLoyeu.yYIGJ/uToY.13KLP.0LuQKyYoezUaC"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) AND "users"."id" != ? LIMIT ?[0m  [["username", "BECCA"], ["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 1]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 2]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 3]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+---------------------------------------------------------------------------------------
+UserTest: test_: Within context should require passwords to be confirmed and matching. 
+---------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "jordan"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.9ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Jordan"], ["last_name", "Stapinski"], ["role", 1], ["username", "jordan"], ["password_digest", "$2a$04$bYlgEa9vNar0eo7JdkWtO.NyrYSZLa.pDqNFibne1qGp688oH6fsy"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "becca"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Becca"], ["last_name", "Kern"], ["role", 1], ["username", "becca"], ["password_digest", "$2a$04$u1mh00dOQyCLKii8uBTSTOWQmA3ZK2xdddGEH3VzArj6z42SZ9Id."], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "connor"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Connor"], ["last_name", "Hanley"], ["role", 1], ["username", "connor"], ["password_digest", "$2a$04$lF2GwlMSGNjVX3AVKvbHfud1h0paGUcZtLmAdQMPuxIwKDD5NicFu"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "tank"], ["LIMIT", 1]]
+  [1m[36mCACHE User Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "tank"], ["LIMIT", 1]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 1]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 2]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 3]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+----------------------------------------------------------------------------------------
+UserTest: test_: Within context should have role methods and recognize all three roles. 
+----------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "jordan"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Jordan"], ["last_name", "Stapinski"], ["role", 1], ["username", "jordan"], ["password_digest", "$2a$04$xLdNrpBtohCj6uXBVzgQ1uZt2S9G1RbpGx8D32cvQwukvzUnU9EgC"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "becca"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Becca"], ["last_name", "Kern"], ["role", 1], ["username", "becca"], ["password_digest", "$2a$04$fgwdxTV5PJAyS2Uu1IRHBeLPsKTIpuYv7AaI0DKYW35/EfBkQDszq"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "connor"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Connor"], ["last_name", "Hanley"], ["role", 1], ["username", "connor"], ["password_digest", "$2a$04$AF8nTrurU/vS1F3BvFANMu1EmW3NGExK6T07wgoImzv9RoY8Qfe/y"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 1]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 2]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 3]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+-------------------------------------------------------------------------
+UserTest: test_: Within context should require a password for new users. 
+-------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "jordan"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Jordan"], ["last_name", "Stapinski"], ["role", 1], ["username", "jordan"], ["password_digest", "$2a$04$luqGj9MFXyh0HWKq2mvgcuuq5zSOzjQ5UV3GLCYXmnw.4hsXdN.P2"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "becca"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Becca"], ["last_name", "Kern"], ["role", 1], ["username", "becca"], ["password_digest", "$2a$04$6rQ3OAwPl9wli6UIxD04xecPkC5CGh/RHev4ep9HX3HuVxn0rBdHi"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "connor"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Connor"], ["last_name", "Hanley"], ["role", 1], ["username", "connor"], ["password_digest", "$2a$04$7rVQrHjJYLQWzbDkaPZC6u./8k43MVpbu9o0zPd2wQJdZjTuBugrS"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "tank"], ["LIMIT", 1]]
+  [1m[36mUser Destroy (0.1ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 1]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 2]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 3]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+---------------------------------------------------------------------------------
+UserTest: test_: Within context should allow user to authenticate with password. 
+---------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "jordan"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Jordan"], ["last_name", "Stapinski"], ["role", 1], ["username", "jordan"], ["password_digest", "$2a$04$PBp67eVgDlBx7Wiia.nOpu.1dMBpiXWzmotuiMAXBadN8/diV1iku"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "becca"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Becca"], ["last_name", "Kern"], ["role", 1], ["username", "becca"], ["password_digest", "$2a$04$p59aCSRWl6hfR3YgCx361OlJmDhZiH2jbHDMVRcNLFSAvKuFjGfdi"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "connor"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Connor"], ["last_name", "Hanley"], ["role", 1], ["username", "connor"], ["password_digest", "$2a$04$R3oZJU8lmAWt03RynZ3EKuFObn32ISMYXqX2xEM0NpI2ea8USz75W"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 1]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 2]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 3]]
+  [1m[36mTRANSACTION (6.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+----------------------------------------------------------------------------
+UserTest: test_: User should validate that :username cannot be empty/falsy. 
+----------------------------------------------------------------------------
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", ""], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+-----------------------------------------------------------------------------------------
+UserTest: test_: Within context should require passwords to be at least four characters. 
+-----------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "jordan"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Jordan"], ["last_name", "Stapinski"], ["role", 1], ["username", "jordan"], ["password_digest", "$2a$04$AuHUhnxjAvXkrz0vMno17.kZTeetgehwCrD/mOI26P.pRaO4UJKt2"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "becca"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Becca"], ["last_name", "Kern"], ["role", 1], ["username", "becca"], ["password_digest", "$2a$04$o6e6jzXud1HLU1po8WUoKeiSbFK9Gybj53lqsWFysnBci6h1qtln."], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "connor"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Connor"], ["last_name", "Hanley"], ["role", 1], ["username", "connor"], ["password_digest", "$2a$04$PRHYjKY8GF8jdQtfoBNsT.vMpKCzq7pRq8XBzwvebx6oPBLDgs0pq"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "tank"], ["LIMIT", 1]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 1]]
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 2]]
+  [1m[36mUser Destroy (0.1ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 3]]
+  [1m[36mTRANSACTION (4.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+-----------------------------------------------------------------------------------
+UserTest: test_: User should validate that :username is case-insensitively unique. 
+-----------------------------------------------------------------------------------
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", nil], ["last_name", nil], ["role", 3], ["username", nil], ["password_digest", nil], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Update (0.0ms)[0m  [1m[33mUPDATE "users" SET "username" = ? WHERE "users"."id" = ?[0m  [["username", "dummy value"], ["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "dummy value"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "DUMMY VALUE"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------------------------------------
+UserTest: test_: User should allow :role to be ‹"assistant"›. 
+--------------------------------------------------------------
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
