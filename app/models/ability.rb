@@ -1,28 +1,45 @@
+# This is the Ability class is where all user permissions are defined.
+# Based on who the user is, he/she would be allowed to make specific actions
 class Ability
   include CanCan::Ability
 
+  # The current user model is passed into the initialize method, so the permissions can be modified based on any user attributes. 
+  # CanCan makes no assumption about how roles are handled in your application.
   def initialize(user)
-    # set user to new User if not logged in
-    user ||= User.new # i.e., a guest user
+    # set user to new User (a guest user) if not logged in
+    user ||= User.new #a guest user (not logged in)
     
     # set authorizations for different user roles
     if user.vet?
-      # they get to do it all
+
+      # The can method is used to define permissions and requires two arguments: 
+
+        # 1. the action you're setting the permission for, 
+        # 2. the class of object you're setting it on.
+
+      # We can pass :manage to represent any action and :all to represent any object.
+      # The vet can perform any action on any object in the system (pet, owner, visit, medicine, procedure, etc.)
+
       can :manage, :all
       
+      # Common actions are :read, :create, :update and :destroy but it can be anything. 
+
     elsif user.assistant?
       # can manage owners, pets, and visits
-      can :manage, Owner
-      can :manage, Pet
-      can :manage, Visit
+      can :manage, Owner #this user can perform all actions (manage) on any Owner object
+      can :manage, Pet #this user can perform all actions (manage) on any Owner object
+      can :manage, Visit #this user can perform all actions (manage) on any Owner object
       
       # can create and destroy dosages and treatments
-      can :manage, Dosage
+      can :manage, Dosage 
       can :manage, Treatment
 
       # can read (costs for) medicines and procedures
-      can :read, Medicine#Cost
-      can :read, Procedure#Cost
+
+      can :read, MedicineCost  #user can read any object of type MedicineCost
+      can :read, ProcedureCost # user can read any object of type ProcedureCost
+
+
 
       # they can read their own profile
       can :show, User do |u|  
@@ -60,7 +77,7 @@ class Ability
       
     else
       # guests can only read animals covered (plus home pages)
-      # can :read, Animal
+      can :read, Animal
     end
   end
 end

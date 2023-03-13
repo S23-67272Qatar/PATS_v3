@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :check_login
+
   authorize_resource
 
   def index
@@ -19,6 +20,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.assistant! if current_user.assistant?
+    # equivalent to
+    # @user.role="assistant" if current_user.role?(:assistant)
     if @user.save
       flash[:notice] = "Successfully added #{@user.proper_name} as a user."
       redirect_to users_url

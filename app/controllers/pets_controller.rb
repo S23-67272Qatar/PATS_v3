@@ -7,10 +7,12 @@ class PetsController < ApplicationController
 
   def index
     # get data on all pets and paginate the output to 10 per page
-    if current_user.owner?
+    if current_user.owner? #equivalent to current_user.role=="owner"
+      # we make sure that the owner sees only his pets
       @active_pets = current_user.owner.pets.active.alphabetical.paginate(page: params[:page]).per_page(10)
       @inactive_pets = current_user.owner.pets.inactive.alphabetical.paginate(page: params[:page]).per_page(10)
-    else
+    else #otherwise (current user is vet or assistant )
+      # get the list of all the pets in the system
       @active_pets = Pet.active.alphabetical.paginate(page: params[:page]).per_page(10)
       @inactive_pets = Pet.inactive.alphabetical.paginate(page: params[:page]).per_page(10)
     end
@@ -18,11 +20,16 @@ class PetsController < ApplicationController
   end
 
   def show
+    # check if the current owner is allowed to see his pet details as well as its recent visits
+    # authorize! :show, @pet
     # get the last 10 visits for this pet
     @recent_visits = @pet.visits.chronological.last(10).to_a
+
   end
 
   def new
+    # authorize! :new, @pet
+
     @pet = Pet.new
   end
 
@@ -30,6 +37,8 @@ class PetsController < ApplicationController
   end
 
   def create
+    # authorize! :create, @pet
+
     @pet = Pet.new(pet_params)
     if @pet.save
       redirect_to @pet, notice: "Successfully added #{@pet.name} as a PATS pet."

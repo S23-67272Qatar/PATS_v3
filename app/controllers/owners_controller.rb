@@ -2,27 +2,34 @@ class OwnersController < ApplicationController
   # A callback to set up an @owner object to work with 
   before_action :set_owner, only: [:show, :edit, :update, :destroy]
   before_action :check_login
-  authorize_resource
 
   def index
     # finding all the active owners and paginating that list (will_paginate)
+  # check is the user is logged in
     @active_owners = Owner.active.alphabetical.paginate(page: params[:page]).per_page(15)
   end
 
   def show
-    # authorize! :show, @owner
-    # get all the pets for this owner
+    # check is the user is logged in
+    authorize! :show, @owner
+    # get all the pets for this 
     @current_pets = @owner.pets.alphabetical.active.to_a
   end
 
   def new
+      # check is the user is logged in
+
     @owner = Owner.new
   end
 
   def edit
+      # check is the user is logged in
+
   end
 
   def create
+      # check is the user is logged in
+
     @owner = Owner.new(owner_params)
     @user = User.new(user_params)
     @user.owner!
@@ -41,6 +48,8 @@ class OwnersController < ApplicationController
   end
 
   def update
+      # check is the user is logged in
+
     respond_to do |format|
       if @owner.update(owner_params)
         format.html { redirect_to(@owner, :notice => "Successfully updated #{@owner.proper_name}.") }
@@ -53,6 +62,8 @@ class OwnersController < ApplicationController
   end
 
   def destroy
+      # check is the user is logged in
+
     ## We don't allow destroy (will deactivate instead)
     @owner.deactive_owner_user_and_pets
     redirect_to owners_url, notice: "Successfully deactivated #{@owner.proper_name} along with associated user and pets."

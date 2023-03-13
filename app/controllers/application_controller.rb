@@ -1,5 +1,11 @@
 class ApplicationController < ActionController::Base
 
+    # just show a flash message instead of full CanCan exception
+    rescue_from CanCan::AccessDenied do |exception|
+      flash[:error] = "You are not authorized to take this action! Please contact the system administrator to get some help!"
+      redirect_to home_path
+    end
+
   private
   # Handling authentication
   def current_user

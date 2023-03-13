@@ -1294,3 +1294,1312 @@ UserTest: test_: User should allow :role to be ‹"assistant"›.
 --------------------------------------------------------------
   [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
   [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+-----------------------------------------
+UsersControllerTest: test_should_get_edit
+-----------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ted"], ["last_name", "Gruberman"], ["role", 1], ["username", "ted"], ["password_digest", "$2a$04$zvZZwx5lIKPFCSaO/Y5e3.mU7cop4aytrRnOM3rikBC8lyEwex/3u"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2023-03-13 08:50:46 +0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1035.2ms | Allocations: 950326)
+  Rendered partials/_topbar.html.erb (Duration: 1.1ms | Allocations: 684)
+  Rendered partials/_nav_guest.html.erb (Duration: 0.4ms | Allocations: 142)
+  Rendered partials/_flash.html.erb (Duration: 0.6ms | Allocations: 194)
+  Rendered partials/_footer.html.erb (Duration: 0.5ms | Allocations: 372)
+  Rendered layout layouts/application.html.erb (Duration: 2835.3ms | Allocations: 1200845)
+Completed 200 OK in 2841ms (Views: 2836.7ms | ActiveRecord: 0.0ms | Allocations: 1204042)
+Started POST "/sessions" for 127.0.0.1 at 2023-03-13 08:50:49 +0300
+Processing by SessionsController#create as HTML
+  Parameters: {"username"=>"ted", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+Redirected to http://www.example.com/home
+Completed 302 Found in 2ms (ActiveRecord: 0.1ms | Allocations: 892)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "gruberman"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ed"], ["last_name", "Gruberman"], ["role", 2], ["username", "gruberman"], ["password_digest", "$2a$04$bRYX7Sf.bI9hvzsevqTME.TnFJ7iA5AFJwSMmX5A37nZZO8tHiioC"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/users/2/edit" for 127.0.0.1 at 2023-03-13 08:50:49 +0300
+Processing by UsersController#edit as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering users/edit.html.erb within layouts/application
+  Rendered users/_fields.html.erb (Duration: 26.7ms | Allocations: 34972)
+  Rendered partials/_form_structure.html.erb (Duration: 59.2ms | Allocations: 40209)
+  Rendered users/edit.html.erb within layouts/application (Duration: 60.5ms | Allocations: 40463)
+  Rendered partials/_topbar.html.erb (Duration: 0.6ms | Allocations: 520)
+  Rendered partials/_nav.html.erb (Duration: 6.3ms | Allocations: 4928)
+  Rendered partials/_flash.html.erb (Duration: 0.1ms | Allocations: 52)
+  Rendered partials/_footer.html.erb (Duration: 0.1ms | Allocations: 181)
+  Rendered layout layouts/application.html.erb (Duration: 75.9ms | Allocations: 59435)
+Completed 200 OK in 79ms (Views: 76.7ms | ActiveRecord: 0.1ms | Allocations: 62306)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+-------------------------------------------------
+UsersControllerTest: test_should_not_destroy_user
+-------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ted"], ["last_name", "Gruberman"], ["role", 1], ["username", "ted"], ["password_digest", "$2a$04$SsWBXDQ0B9f5oNaIn24jrezkVUSPOJct3SfcQWBB1fO/2C4bRz7wi"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2023-03-13 08:50:49 +0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.3ms | Allocations: 4754)
+  Rendered partials/_topbar.html.erb (Duration: 0.8ms | Allocations: 506)
+  Rendered partials/_nav_guest.html.erb (Duration: 0.1ms | Allocations: 42)
+  Rendered partials/_flash.html.erb (Duration: 0.0ms | Allocations: 33)
+  Rendered partials/_footer.html.erb (Duration: 0.1ms | Allocations: 173)
+  Rendered layout layouts/application.html.erb (Duration: 10.8ms | Allocations: 18623)
+Completed 200 OK in 11ms (Views: 11.0ms | ActiveRecord: 0.0ms | Allocations: 18873)
+Started POST "/sessions" for 127.0.0.1 at 2023-03-13 08:50:49 +0300
+Processing by SessionsController#create as HTML
+  Parameters: {"username"=>"ted", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+Redirected to http://www.example.com/home
+Completed 302 Found in 2ms (ActiveRecord: 0.1ms | Allocations: 337)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "gruberman"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ed"], ["last_name", "Gruberman"], ["role", 2], ["username", "gruberman"], ["password_digest", "$2a$04$PkqRV1vqUraq/53BjF8Oh.65HaUVcHdBi3ACFSJRD8h2vqwzMbilW"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+Started DELETE "/users/2" for 127.0.0.1 at 2023-03-13 08:50:49 +0300
+Processing by UsersController#destroy as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Destroy (0.1ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 2]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/users
+Completed 302 Found in 1ms (ActiveRecord: 0.2ms | Allocations: 984)
+  [1m[36mUser Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------------------
+UsersControllerTest: test_should_create_user
+--------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ted"], ["last_name", "Gruberman"], ["role", 1], ["username", "ted"], ["password_digest", "$2a$04$ZHZt9P4TaPQIPauVCfZ/Pe00r3iJwuSGpSHAlDg3ar1kywicupzQu"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2023-03-13 08:50:49 +0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.0ms | Allocations: 4681)
+  Rendered partials/_topbar.html.erb (Duration: 0.5ms | Allocations: 500)
+  Rendered partials/_nav_guest.html.erb (Duration: 0.0ms | Allocations: 42)
+  Rendered partials/_flash.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered partials/_footer.html.erb (Duration: 0.1ms | Allocations: 171)
+  Rendered layout layouts/application.html.erb (Duration: 9.1ms | Allocations: 18398)
+Completed 200 OK in 9ms (Views: 9.3ms | ActiveRecord: 0.0ms | Allocations: 18594)
+Started POST "/sessions" for 127.0.0.1 at 2023-03-13 08:50:49 +0300
+Processing by SessionsController#create as HTML
+  Parameters: {"username"=>"ted", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+Redirected to http://www.example.com/home
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms | Allocations: 308)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "gruberman"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ed"], ["last_name", "Gruberman"], ["role", 2], ["username", "gruberman"], ["password_digest", "$2a$04$muGDCEzxNybjkHeoHxXYluaHm/kQzgg15mJ59vWKfZrDiiTnwvqZ2"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+Started POST "/users" for 127.0.0.1 at 2023-03-13 08:50:49 +0300
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"first_name"=>"Eric", "last_name"=>"Gruberman", "username"=>"eric", "role"=>"owner", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "active"=>"true"}}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms | Allocations: 807)
+
+ArgumentError - wrong number of arguments (given 1, expected 0):
+  app/controllers/users_controller.rb:24:in `create'
+  test/controllers/users_controller_test.rb:21:in `block (2 levels) in <class:UsersControllerTest>'
+  test/controllers/users_controller_test.rb:20:in `block in <class:UsersControllerTest>'
+
+  [1m[36mCACHE User Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------------------
+UsersControllerTest: test_should_update_user
+--------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ted"], ["last_name", "Gruberman"], ["role", 1], ["username", "ted"], ["password_digest", "$2a$04$SPtaWcGg5gCgQLzPvmGRWOjaTL84B3qIpib94PRAd0RymtzAyqRgG"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2023-03-13 08:50:49 +0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.0ms | Allocations: 4681)
+  Rendered partials/_topbar.html.erb (Duration: 0.5ms | Allocations: 500)
+  Rendered partials/_nav_guest.html.erb (Duration: 0.0ms | Allocations: 42)
+  Rendered partials/_flash.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered partials/_footer.html.erb (Duration: 0.1ms | Allocations: 171)
+  Rendered layout layouts/application.html.erb (Duration: 9.6ms | Allocations: 18398)
+Completed 200 OK in 10ms (Views: 9.8ms | ActiveRecord: 0.0ms | Allocations: 18594)
+Started POST "/sessions" for 127.0.0.1 at 2023-03-13 08:50:49 +0300
+Processing by SessionsController#create as HTML
+  Parameters: {"username"=>"ted", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+Redirected to http://www.example.com/home
+Completed 302 Found in 2ms (ActiveRecord: 0.1ms | Allocations: 308)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "gruberman"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ed"], ["last_name", "Gruberman"], ["role", 2], ["username", "gruberman"], ["password_digest", "$2a$04$XXWSO6tuFe.eabUwrtPiwOqG.S574ojtBZThuBjWADLmt1JpEVa5y"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started PATCH "/users/2" for 127.0.0.1 at 2023-03-13 08:50:49 +0300
+Processing by UsersController#update as HTML
+  Parameters: {"user"=>{"first_name"=>"Eric", "last_name"=>"Gruberman", "username"=>"gruberman", "role"=>"assistant", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "active"=>"true"}, "id"=>"2"}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) AND "users"."id" != ? LIMIT ?[0m  [["username", "gruberman"], ["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Update (0.0ms)[0m  [1m[33mUPDATE "users" SET "first_name" = ?, "password_digest" = ? WHERE "users"."id" = ?[0m  [["first_name", "Eric"], ["password_digest", "$2a$04$TlJIJObBZQLkAbpkNUSw1eZSK3L7rXXGau6ruFANrGFZyR7tgPrf2"], ["id", 2]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/users
+Completed 302 Found in 3ms (ActiveRecord: 0.2ms | Allocations: 1466)
+Started PATCH "/users/2" for 127.0.0.1 at 2023-03-13 08:50:49 +0300
+Processing by UsersController#update as HTML
+  Parameters: {"user"=>{"first_name"=>"Eric", "last_name"=>"Gruberman", "username"=>nil, "role"=>"assistant", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "active"=>"true"}, "id"=>"2"}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" IS NULL AND "users"."id" != ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  Rendering layout layouts/application.html.erb
+  Rendering users/edit.html.erb within layouts/application
+  Rendered users/_fields.html.erb (Duration: 2.7ms | Allocations: 5445)
+  Rendered partials/_form_structure.html.erb (Duration: 3.2ms | Allocations: 6031)
+  Rendered users/edit.html.erb within layouts/application (Duration: 3.2ms | Allocations: 6081)
+  Rendered partials/_topbar.html.erb (Duration: 0.5ms | Allocations: 499)
+  Rendered partials/_nav.html.erb (Duration: 0.2ms | Allocations: 402)
+  Rendered partials/_flash.html.erb (Duration: 0.0ms | Allocations: 34)
+  Rendered partials/_footer.html.erb (Duration: 0.1ms | Allocations: 171)
+  Rendered layout layouts/application.html.erb (Duration: 11.7ms | Allocations: 20092)
+Completed 200 OK in 15ms (Views: 11.9ms | ActiveRecord: 0.1ms | Allocations: 22768)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+------------------------------------------
+UsersControllerTest: test_should_get_index
+------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ted"], ["last_name", "Gruberman"], ["role", 1], ["username", "ted"], ["password_digest", "$2a$04$mMTqYFKMnIL8DRgG3CyqX.hR4oTHAZS7Y/qUr77lRWlveYOHGbn9W"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2023-03-13 08:50:49 +0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.0ms | Allocations: 4681)
+  Rendered partials/_topbar.html.erb (Duration: 0.6ms | Allocations: 500)
+  Rendered partials/_nav_guest.html.erb (Duration: 0.0ms | Allocations: 42)
+  Rendered partials/_flash.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered partials/_footer.html.erb (Duration: 0.1ms | Allocations: 171)
+  Rendered layout layouts/application.html.erb (Duration: 9.6ms | Allocations: 18398)
+Completed 200 OK in 10ms (Views: 9.8ms | ActiveRecord: 0.0ms | Allocations: 18594)
+Started POST "/sessions" for 127.0.0.1 at 2023-03-13 08:50:49 +0300
+Processing by SessionsController#create as HTML
+  Parameters: {"username"=>"ted", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+Redirected to http://www.example.com/home
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms | Allocations: 308)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "gruberman"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ed"], ["last_name", "Gruberman"], ["role", 2], ["username", "gruberman"], ["password_digest", "$2a$04$3aXHpbaUh3jUIY9iK7AQ7uPufVfTH2bnHMl0x6ah1mAdbGIFCuCuG"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/users" for 127.0.0.1 at 2023-03-13 08:50:49 +0300
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT ? OFFSET ?[0m  [["LIMIT", 15], ["OFFSET", 0]]
+  Rendered partials/_add_new_object.html.erb (Duration: 0.5ms | Allocations: 309)
+  Rendered users/_user_list.html.erb (Duration: 1.6ms | Allocations: 1258)
+  Rendered partials/_structure1.html.erb (Duration: 2.5ms | Allocations: 1547)
+  Rendered users/index.html.erb within layouts/application (Duration: 4.3ms | Allocations: 1763)
+  Rendered partials/_topbar.html.erb (Duration: 2.9ms | Allocations: 499)
+  Rendered partials/_nav.html.erb (Duration: 0.3ms | Allocations: 399)
+  Rendered partials/_flash.html.erb (Duration: 0.0ms | Allocations: 33)
+  Rendered partials/_footer.html.erb (Duration: 0.1ms | Allocations: 171)
+  Rendered layout layouts/application.html.erb (Duration: 24.6ms | Allocations: 15770)
+Completed 200 OK in 26ms (Views: 24.8ms | ActiveRecord: 0.1ms | Allocations: 16631)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+----------------------------------------
+UsersControllerTest: test_should_get_new
+----------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ted"], ["last_name", "Gruberman"], ["role", 1], ["username", "ted"], ["password_digest", "$2a$04$Kp0fdNVCbktT1qP.OCjzuO.yrwlKqjeuLNB8nJH1YZ1N/iWMHOedq"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2023-03-13 08:50:49 +0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 9.1ms | Allocations: 4682)
+  Rendered partials/_topbar.html.erb (Duration: 1.0ms | Allocations: 500)
+  Rendered partials/_nav_guest.html.erb (Duration: 0.0ms | Allocations: 42)
+  Rendered partials/_flash.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered partials/_footer.html.erb (Duration: 0.1ms | Allocations: 171)
+  Rendered layout layouts/application.html.erb (Duration: 25.1ms | Allocations: 18399)
+Completed 200 OK in 25ms (Views: 25.3ms | ActiveRecord: 0.0ms | Allocations: 18595)
+Started POST "/sessions" for 127.0.0.1 at 2023-03-13 08:50:49 +0300
+Processing by SessionsController#create as HTML
+  Parameters: {"username"=>"ted", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+Redirected to http://www.example.com/home
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms | Allocations: 308)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "gruberman"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ed"], ["last_name", "Gruberman"], ["role", 2], ["username", "gruberman"], ["password_digest", "$2a$04$jFnSZqNuCfZ2NST.z2qAp.5u8Wc2MCTkrKzGlily65fPWA0Kqx2ru"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/users/new" for 127.0.0.1 at 2023-03-13 08:50:49 +0300
+Processing by UsersController#new as HTML
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_fields.html.erb (Duration: 7.3ms | Allocations: 4608)
+  Rendered partials/_form_structure.html.erb (Duration: 8.5ms | Allocations: 5042)
+  Rendered users/new.html.erb within layouts/application (Duration: 9.9ms | Allocations: 5178)
+  Rendered partials/_topbar.html.erb (Duration: 0.7ms | Allocations: 503)
+  Rendered partials/_nav.html.erb (Duration: 0.2ms | Allocations: 399)
+  Rendered partials/_flash.html.erb (Duration: 0.0ms | Allocations: 33)
+  Rendered partials/_footer.html.erb (Duration: 0.1ms | Allocations: 171)
+  Rendered layout layouts/application.html.erb (Duration: 38.6ms | Allocations: 19198)
+Completed 200 OK in 40ms (Views: 38.8ms | ActiveRecord: 0.0ms | Allocations: 19897)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+----------------------------------------
+UsersControllerTest: test_should_get_new
+----------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ted"], ["last_name", "Gruberman"], ["role", 1], ["username", "ted"], ["password_digest", "$2a$04$vWrhZaUqK54Teh04.KE1nO7gHE3oYJu2X1yvPT9Hpr66OGoIRKn.q"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2023-03-13 08:51:07 +0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1019.4ms | Allocations: 950327)
+  Rendered partials/_topbar.html.erb (Duration: 1.1ms | Allocations: 682)
+  Rendered partials/_nav_guest.html.erb (Duration: 0.4ms | Allocations: 142)
+  Rendered partials/_flash.html.erb (Duration: 0.3ms | Allocations: 194)
+  Rendered partials/_footer.html.erb (Duration: 0.5ms | Allocations: 372)
+  Rendered layout layouts/application.html.erb (Duration: 1431.4ms | Allocations: 1041582)
+Completed 200 OK in 1438ms (Views: 1433.2ms | ActiveRecord: 0.0ms | Allocations: 1044779)
+Started POST "/sessions" for 127.0.0.1 at 2023-03-13 08:51:08 +0300
+Processing by SessionsController#create as HTML
+  Parameters: {"username"=>"ted", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+Redirected to http://www.example.com/home
+Completed 302 Found in 2ms (ActiveRecord: 0.1ms | Allocations: 892)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "gruberman"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ed"], ["last_name", "Gruberman"], ["role", 2], ["username", "gruberman"], ["password_digest", "$2a$04$uGGfHjw6MlYXWaw0Kr.IteKqQWkXfOE/BrgM1KUF3KZRjknVRUybW"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/users/new" for 127.0.0.1 at 2023-03-13 08:51:08 +0300
+Processing by UsersController#new as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_fields.html.erb (Duration: 18.7ms | Allocations: 34989)
+  Rendered partials/_form_structure.html.erb (Duration: 30.4ms | Allocations: 40157)
+  Rendered users/new.html.erb within layouts/application (Duration: 31.7ms | Allocations: 40411)
+  Rendered partials/_topbar.html.erb (Duration: 0.5ms | Allocations: 520)
+  Rendered partials/_nav.html.erb (Duration: 5.4ms | Allocations: 4925)
+  Rendered partials/_flash.html.erb (Duration: 0.0ms | Allocations: 52)
+  Rendered partials/_footer.html.erb (Duration: 0.1ms | Allocations: 181)
+  Rendered layout layouts/application.html.erb (Duration: 45.8ms | Allocations: 59381)
+Completed 200 OK in 49ms (Views: 46.5ms | ActiveRecord: 0.1ms | Allocations: 62217)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+-------------------------------------------------
+UsersControllerTest: test_should_not_destroy_user
+-------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ted"], ["last_name", "Gruberman"], ["role", 1], ["username", "ted"], ["password_digest", "$2a$04$YD15.I0s32DM5qfSmPVbxOxt51SVre69YKbOBZmuHdDBHFbuJwcl6"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2023-03-13 08:51:08 +0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.1ms | Allocations: 4753)
+  Rendered partials/_topbar.html.erb (Duration: 0.6ms | Allocations: 506)
+  Rendered partials/_nav_guest.html.erb (Duration: 0.0ms | Allocations: 42)
+  Rendered partials/_flash.html.erb (Duration: 0.0ms | Allocations: 33)
+  Rendered partials/_footer.html.erb (Duration: 0.1ms | Allocations: 173)
+  Rendered layout layouts/application.html.erb (Duration: 10.2ms | Allocations: 18624)
+Completed 200 OK in 11ms (Views: 10.4ms | ActiveRecord: 0.0ms | Allocations: 18874)
+Started POST "/sessions" for 127.0.0.1 at 2023-03-13 08:51:08 +0300
+Processing by SessionsController#create as HTML
+  Parameters: {"username"=>"ted", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+Redirected to http://www.example.com/home
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms | Allocations: 337)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "gruberman"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ed"], ["last_name", "Gruberman"], ["role", 2], ["username", "gruberman"], ["password_digest", "$2a$04$mVA97yoGwiITwO9mkgH.gO6IarPMMmTCH7AW6hspYPQdFdabURKgq"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+Started DELETE "/users/2" for 127.0.0.1 at 2023-03-13 08:51:08 +0300
+Processing by UsersController#destroy as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 2]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/users
+Completed 302 Found in 1ms (ActiveRecord: 0.1ms | Allocations: 996)
+  [1m[36mUser Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------------------
+UsersControllerTest: test_should_update_user
+--------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ted"], ["last_name", "Gruberman"], ["role", 1], ["username", "ted"], ["password_digest", "$2a$04$sh5s68zX8Vigg6hBlcJYLel4FFaEmej7dWGwGChgA2HyNd77AotTy"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2023-03-13 08:51:08 +0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.0ms | Allocations: 4681)
+  Rendered partials/_topbar.html.erb (Duration: 0.8ms | Allocations: 500)
+  Rendered partials/_nav_guest.html.erb (Duration: 0.0ms | Allocations: 42)
+  Rendered partials/_flash.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered partials/_footer.html.erb (Duration: 0.1ms | Allocations: 171)
+  Rendered layout layouts/application.html.erb (Duration: 10.5ms | Allocations: 18400)
+Completed 200 OK in 11ms (Views: 10.7ms | ActiveRecord: 0.0ms | Allocations: 18596)
+Started POST "/sessions" for 127.0.0.1 at 2023-03-13 08:51:08 +0300
+Processing by SessionsController#create as HTML
+  Parameters: {"username"=>"ted", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+Redirected to http://www.example.com/home
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms | Allocations: 308)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "gruberman"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ed"], ["last_name", "Gruberman"], ["role", 2], ["username", "gruberman"], ["password_digest", "$2a$04$m0XXDEHz.5O1T69UcCAgKeqEI23iCHfgXiRqwYw0paH7TCfjcXL52"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started PATCH "/users/2" for 127.0.0.1 at 2023-03-13 08:51:08 +0300
+Processing by UsersController#update as HTML
+  Parameters: {"user"=>{"first_name"=>"Eric", "last_name"=>"Gruberman", "username"=>"gruberman", "role"=>"assistant", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "active"=>"true"}, "id"=>"2"}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) AND "users"."id" != ? LIMIT ?[0m  [["username", "gruberman"], ["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Update (0.0ms)[0m  [1m[33mUPDATE "users" SET "first_name" = ?, "password_digest" = ? WHERE "users"."id" = ?[0m  [["first_name", "Eric"], ["password_digest", "$2a$04$nimIE9g0mp1/pNW1GlH9DOtQYeJ7A4gwz9WJrUyYpfpIgYQ42fRMm"], ["id", 2]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/users
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms | Allocations: 1522)
+Started PATCH "/users/2" for 127.0.0.1 at 2023-03-13 08:51:08 +0300
+Processing by UsersController#update as HTML
+  Parameters: {"user"=>{"first_name"=>"Eric", "last_name"=>"Gruberman", "username"=>nil, "role"=>"assistant", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "active"=>"true"}, "id"=>"2"}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" IS NULL AND "users"."id" != ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  Rendering layout layouts/application.html.erb
+  Rendering users/edit.html.erb within layouts/application
+  Rendered users/_fields.html.erb (Duration: 2.6ms | Allocations: 5565)
+  Rendered partials/_form_structure.html.erb (Duration: 3.2ms | Allocations: 6177)
+  Rendered users/edit.html.erb within layouts/application (Duration: 4.4ms | Allocations: 6333)
+  Rendered partials/_topbar.html.erb (Duration: 0.5ms | Allocations: 499)
+  Rendered partials/_nav.html.erb (Duration: 0.2ms | Allocations: 402)
+  Rendered partials/_flash.html.erb (Duration: 0.0ms | Allocations: 34)
+  Rendered partials/_footer.html.erb (Duration: 0.1ms | Allocations: 171)
+  Rendered layout layouts/application.html.erb (Duration: 13.1ms | Allocations: 20346)
+Completed 200 OK in 17ms (Views: 13.5ms | ActiveRecord: 0.1ms | Allocations: 23108)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------------------
+UsersControllerTest: test_should_create_user
+--------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ted"], ["last_name", "Gruberman"], ["role", 1], ["username", "ted"], ["password_digest", "$2a$04$BLi8mNRyTxBQ4X4ub9FT4uKYZkzeeDiIfhVgBktESv8N/DMQY35CO"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2023-03-13 08:51:08 +0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.1ms | Allocations: 4681)
+  Rendered partials/_topbar.html.erb (Duration: 0.4ms | Allocations: 500)
+  Rendered partials/_nav_guest.html.erb (Duration: 0.0ms | Allocations: 42)
+  Rendered partials/_flash.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered partials/_footer.html.erb (Duration: 0.1ms | Allocations: 171)
+  Rendered layout layouts/application.html.erb (Duration: 9.1ms | Allocations: 18400)
+Completed 200 OK in 9ms (Views: 9.3ms | ActiveRecord: 0.0ms | Allocations: 18596)
+Started POST "/sessions" for 127.0.0.1 at 2023-03-13 08:51:08 +0300
+Processing by SessionsController#create as HTML
+  Parameters: {"username"=>"ted", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+Redirected to http://www.example.com/home
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms | Allocations: 308)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "gruberman"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ed"], ["last_name", "Gruberman"], ["role", 2], ["username", "gruberman"], ["password_digest", "$2a$04$/oBWLpw.utHZGMrAraCpy.flsoxvy9q0/zPpQTmjklzAvAbnxHSC2"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+Started POST "/users" for 127.0.0.1 at 2023-03-13 08:51:08 +0300
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"first_name"=>"Eric", "last_name"=>"Gruberman", "username"=>"eric", "role"=>"owner", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "active"=>"true"}}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms | Allocations: 720)
+
+ArgumentError - wrong number of arguments (given 1, expected 0):
+  app/controllers/users_controller.rb:24:in `create'
+  test/controllers/users_controller_test.rb:21:in `block (2 levels) in <class:UsersControllerTest>'
+  test/controllers/users_controller_test.rb:20:in `block in <class:UsersControllerTest>'
+
+  [1m[36mCACHE User Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+-----------------------------------------
+UsersControllerTest: test_should_get_edit
+-----------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ted"], ["last_name", "Gruberman"], ["role", 1], ["username", "ted"], ["password_digest", "$2a$04$xlyNqB8gwlUt/Bf57kHBqu7P5f.Nc3C5K6RRp4IuSY4WqcQ9ki.ge"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2023-03-13 08:51:08 +0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.0ms | Allocations: 4681)
+  Rendered partials/_topbar.html.erb (Duration: 0.9ms | Allocations: 500)
+  Rendered partials/_nav_guest.html.erb (Duration: 0.1ms | Allocations: 42)
+  Rendered partials/_flash.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered partials/_footer.html.erb (Duration: 0.1ms | Allocations: 171)
+  Rendered layout layouts/application.html.erb (Duration: 10.2ms | Allocations: 18400)
+Completed 200 OK in 11ms (Views: 10.4ms | ActiveRecord: 0.0ms | Allocations: 18596)
+Started POST "/sessions" for 127.0.0.1 at 2023-03-13 08:51:08 +0300
+Processing by SessionsController#create as HTML
+  Parameters: {"username"=>"ted", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+Redirected to http://www.example.com/home
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms | Allocations: 308)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "gruberman"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ed"], ["last_name", "Gruberman"], ["role", 2], ["username", "gruberman"], ["password_digest", "$2a$04$fnP69NMJkIQJtc8jrgat/ecMlkfkMR1TgV.jE9/oo0tiWtyiqlWzW"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/users/2/edit" for 127.0.0.1 at 2023-03-13 08:51:08 +0300
+Processing by UsersController#edit as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering users/edit.html.erb within layouts/application
+  Rendered users/_fields.html.erb (Duration: 2.1ms | Allocations: 4460)
+  Rendered partials/_form_structure.html.erb (Duration: 2.5ms | Allocations: 4933)
+  Rendered users/edit.html.erb within layouts/application (Duration: 2.6ms | Allocations: 4983)
+  Rendered partials/_topbar.html.erb (Duration: 0.7ms | Allocations: 499)
+  Rendered partials/_nav.html.erb (Duration: 0.2ms | Allocations: 399)
+  Rendered partials/_flash.html.erb (Duration: 0.0ms | Allocations: 33)
+  Rendered partials/_footer.html.erb (Duration: 0.1ms | Allocations: 171)
+  Rendered layout layouts/application.html.erb (Duration: 12.1ms | Allocations: 18992)
+Completed 200 OK in 13ms (Views: 12.4ms | ActiveRecord: 0.1ms | Allocations: 19709)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+------------------------------------------
+UsersControllerTest: test_should_get_index
+------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ted"], ["last_name", "Gruberman"], ["role", 1], ["username", "ted"], ["password_digest", "$2a$04$ykn8NgI2m0VvFkaNQLTlKegmBYifY7A/SaW.o.S4YHWTSvbU/ZGGi"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2023-03-13 08:51:08 +0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.1ms | Allocations: 4681)
+  Rendered partials/_topbar.html.erb (Duration: 0.5ms | Allocations: 503)
+  Rendered partials/_nav_guest.html.erb (Duration: 0.2ms | Allocations: 43)
+  Rendered partials/_flash.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered partials/_footer.html.erb (Duration: 0.1ms | Allocations: 171)
+  Rendered layout layouts/application.html.erb (Duration: 16.1ms | Allocations: 18416)
+Completed 200 OK in 16ms (Views: 16.3ms | ActiveRecord: 0.0ms | Allocations: 18613)
+Started POST "/sessions" for 127.0.0.1 at 2023-03-13 08:51:08 +0300
+Processing by SessionsController#create as HTML
+  Parameters: {"username"=>"ted", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+Redirected to http://www.example.com/home
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms | Allocations: 308)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "gruberman"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ed"], ["last_name", "Gruberman"], ["role", 2], ["username", "gruberman"], ["password_digest", "$2a$04$W1Ex1Ckgoiw8hrc4IKM6U.3t0L/TKaw4PhMetkQJzrfxiicAjt4qK"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/users" for 127.0.0.1 at 2023-03-13 08:51:08 +0300
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT ? OFFSET ?[0m  [["LIMIT", 15], ["OFFSET", 0]]
+  Rendered partials/_add_new_object.html.erb (Duration: 0.5ms | Allocations: 308)
+  Rendered users/_user_list.html.erb (Duration: 1.5ms | Allocations: 1257)
+  Rendered partials/_structure1.html.erb (Duration: 1.9ms | Allocations: 1546)
+  Rendered users/index.html.erb within layouts/application (Duration: 3.5ms | Allocations: 1753)
+  Rendered partials/_topbar.html.erb (Duration: 0.5ms | Allocations: 499)
+  Rendered partials/_nav.html.erb (Duration: 0.2ms | Allocations: 399)
+  Rendered partials/_flash.html.erb (Duration: 0.0ms | Allocations: 33)
+  Rendered partials/_footer.html.erb (Duration: 0.1ms | Allocations: 171)
+  Rendered layout layouts/application.html.erb (Duration: 12.1ms | Allocations: 15766)
+Completed 200 OK in 13ms (Views: 12.2ms | ActiveRecord: 0.2ms | Allocations: 16603)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+-----------------------------------------
+UsersControllerTest: test_should_get_edit
+-----------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ted"], ["last_name", "Gruberman"], ["role", 1], ["username", "ted"], ["password_digest", "$2a$04$E1WEOliEXSVOkbBZDou9j.qxG54PCjuMeg6FwtRGudP851QBJ7tCu"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2023-03-13 08:51:46 +0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 982.3ms | Allocations: 950327)
+  Rendered partials/_topbar.html.erb (Duration: 0.9ms | Allocations: 682)
+  Rendered partials/_nav_guest.html.erb (Duration: 0.3ms | Allocations: 142)
+  Rendered partials/_flash.html.erb (Duration: 0.3ms | Allocations: 194)
+  Rendered partials/_footer.html.erb (Duration: 0.5ms | Allocations: 372)
+  Rendered layout layouts/application.html.erb (Duration: 1381.7ms | Allocations: 1044552)
+Completed 200 OK in 1387ms (Views: 1383.1ms | ActiveRecord: 0.0ms | Allocations: 1047750)
+Started POST "/sessions" for 127.0.0.1 at 2023-03-13 08:51:48 +0300
+Processing by SessionsController#create as HTML
+  Parameters: {"username"=>"ted", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+Redirected to http://www.example.com/home
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms | Allocations: 892)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "gruberman"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ed"], ["last_name", "Gruberman"], ["role", 2], ["username", "gruberman"], ["password_digest", "$2a$04$WKIkB90A0LKSylGmk0msnOhtJa5a0dWwKStkaxi52XtrgMB5lB7C."], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/users/2/edit" for 127.0.0.1 at 2023-03-13 08:51:48 +0300
+Processing by UsersController#edit as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering users/edit.html.erb within layouts/application
+  Rendered users/_fields.html.erb (Duration: 19.5ms | Allocations: 34972)
+  Rendered partials/_form_structure.html.erb (Duration: 35.4ms | Allocations: 40209)
+  Rendered users/edit.html.erb within layouts/application (Duration: 36.8ms | Allocations: 40463)
+  Rendered partials/_topbar.html.erb (Duration: 0.4ms | Allocations: 520)
+  Rendered partials/_nav.html.erb (Duration: 5.3ms | Allocations: 4927)
+  Rendered partials/_flash.html.erb (Duration: 0.0ms | Allocations: 52)
+  Rendered partials/_footer.html.erb (Duration: 0.2ms | Allocations: 181)
+  Rendered layout layouts/application.html.erb (Duration: 50.6ms | Allocations: 59435)
+Completed 200 OK in 70ms (Views: 51.6ms | ActiveRecord: 0.1ms | Allocations: 62314)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+------------------------------------------
+UsersControllerTest: test_should_get_index
+------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ted"], ["last_name", "Gruberman"], ["role", 1], ["username", "ted"], ["password_digest", "$2a$04$ZmASZs9zrpvOVLrPxCbqa.xaKuEP.h1HBn.JMQBklwGikYbi9OW9."], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2023-03-13 08:51:48 +0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.1ms | Allocations: 4753)
+  Rendered partials/_topbar.html.erb (Duration: 0.5ms | Allocations: 506)
+  Rendered partials/_nav_guest.html.erb (Duration: 0.0ms | Allocations: 42)
+  Rendered partials/_flash.html.erb (Duration: 0.0ms | Allocations: 33)
+  Rendered partials/_footer.html.erb (Duration: 0.1ms | Allocations: 173)
+  Rendered layout layouts/application.html.erb (Duration: 9.9ms | Allocations: 18624)
+Completed 200 OK in 10ms (Views: 10.2ms | ActiveRecord: 0.0ms | Allocations: 18874)
+Started POST "/sessions" for 127.0.0.1 at 2023-03-13 08:51:48 +0300
+Processing by SessionsController#create as HTML
+  Parameters: {"username"=>"ted", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+Redirected to http://www.example.com/home
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms | Allocations: 337)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "gruberman"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ed"], ["last_name", "Gruberman"], ["role", 2], ["username", "gruberman"], ["password_digest", "$2a$04$DvAMVO1Wz81dtmsfkAjzWOYgRqYubzRdxx8.NIcaYy96F.IAt0k5e"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/users" for 127.0.0.1 at 2023-03-13 08:51:48 +0300
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT ? OFFSET ?[0m  [["LIMIT", 15], ["OFFSET", 0]]
+  Rendered partials/_add_new_object.html.erb (Duration: 0.5ms | Allocations: 309)
+  Rendered users/_user_list.html.erb (Duration: 1.6ms | Allocations: 1267)
+  Rendered partials/_structure1.html.erb (Duration: 2.0ms | Allocations: 1560)
+  Rendered users/index.html.erb within layouts/application (Duration: 3.6ms | Allocations: 1782)
+  Rendered partials/_topbar.html.erb (Duration: 0.5ms | Allocations: 499)
+  Rendered partials/_nav.html.erb (Duration: 0.2ms | Allocations: 402)
+  Rendered partials/_flash.html.erb (Duration: 0.0ms | Allocations: 34)
+  Rendered partials/_footer.html.erb (Duration: 0.1ms | Allocations: 171)
+  Rendered layout layouts/application.html.erb (Duration: 12.6ms | Allocations: 15795)
+Completed 200 OK in 14ms (Views: 12.7ms | ActiveRecord: 0.1ms | Allocations: 16706)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------------------
+UsersControllerTest: test_should_update_user
+--------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ted"], ["last_name", "Gruberman"], ["role", 1], ["username", "ted"], ["password_digest", "$2a$04$3.mihnZ7DZwdUTdFlai9HugKugdgSq6/WnZqrgf3r16s9H.6XmXXi"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2023-03-13 08:51:48 +0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.1ms | Allocations: 4682)
+  Rendered partials/_topbar.html.erb (Duration: 0.6ms | Allocations: 500)
+  Rendered partials/_nav_guest.html.erb (Duration: 0.0ms | Allocations: 42)
+  Rendered partials/_flash.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered partials/_footer.html.erb (Duration: 0.1ms | Allocations: 171)
+  Rendered layout layouts/application.html.erb (Duration: 10.4ms | Allocations: 18401)
+Completed 200 OK in 11ms (Views: 10.6ms | ActiveRecord: 0.0ms | Allocations: 18597)
+Started POST "/sessions" for 127.0.0.1 at 2023-03-13 08:51:48 +0300
+Processing by SessionsController#create as HTML
+  Parameters: {"username"=>"ted", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+Redirected to http://www.example.com/home
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms | Allocations: 308)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "gruberman"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ed"], ["last_name", "Gruberman"], ["role", 2], ["username", "gruberman"], ["password_digest", "$2a$04$JYVFP1J9z2WtFuT1CjGGP.Vh9oe1OsopAItaRqxxVv0xFG7/ySFA2"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started PATCH "/users/2" for 127.0.0.1 at 2023-03-13 08:51:48 +0300
+Processing by UsersController#update as HTML
+  Parameters: {"user"=>{"first_name"=>"Eric", "last_name"=>"Gruberman", "username"=>"gruberman", "role"=>"assistant", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "active"=>"true"}, "id"=>"2"}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) AND "users"."id" != ? LIMIT ?[0m  [["username", "gruberman"], ["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Update (0.0ms)[0m  [1m[33mUPDATE "users" SET "first_name" = ?, "password_digest" = ? WHERE "users"."id" = ?[0m  [["first_name", "Eric"], ["password_digest", "$2a$04$LzIWKIhcjHZeJgmfiRIAE.VoNrD2II1txyPF6F30AWwtsQgDCDm3m"], ["id", 2]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/users
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms | Allocations: 1572)
+Started PATCH "/users/2" for 127.0.0.1 at 2023-03-13 08:51:48 +0300
+Processing by UsersController#update as HTML
+  Parameters: {"user"=>{"first_name"=>"Eric", "last_name"=>"Gruberman", "username"=>nil, "role"=>"assistant", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "active"=>"true"}, "id"=>"2"}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" IS NULL AND "users"."id" != ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  Rendering layout layouts/application.html.erb
+  Rendering users/edit.html.erb within layouts/application
+  Rendered users/_fields.html.erb (Duration: 2.6ms | Allocations: 5445)
+  Rendered partials/_form_structure.html.erb (Duration: 3.0ms | Allocations: 6031)
+  Rendered users/edit.html.erb within layouts/application (Duration: 3.1ms | Allocations: 6081)
+  Rendered partials/_topbar.html.erb (Duration: 0.5ms | Allocations: 499)
+  Rendered partials/_nav.html.erb (Duration: 0.2ms | Allocations: 399)
+  Rendered partials/_flash.html.erb (Duration: 0.0ms | Allocations: 34)
+  Rendered partials/_footer.html.erb (Duration: 0.1ms | Allocations: 171)
+  Rendered layout layouts/application.html.erb (Duration: 11.5ms | Allocations: 20091)
+Completed 200 OK in 14ms (Views: 11.7ms | ActiveRecord: 0.1ms | Allocations: 22775)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+----------------------------------------
+UsersControllerTest: test_should_get_new
+----------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ted"], ["last_name", "Gruberman"], ["role", 1], ["username", "ted"], ["password_digest", "$2a$04$aJwbDHh45fpk.Gv/1cEQae7WCXHMd9Vtuqn5kYV629wpfPzS/gBIC"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2023-03-13 08:51:48 +0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.0ms | Allocations: 4681)
+  Rendered partials/_topbar.html.erb (Duration: 0.5ms | Allocations: 500)
+  Rendered partials/_nav_guest.html.erb (Duration: 0.0ms | Allocations: 42)
+  Rendered partials/_flash.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered partials/_footer.html.erb (Duration: 0.1ms | Allocations: 171)
+  Rendered layout layouts/application.html.erb (Duration: 9.9ms | Allocations: 18400)
+Completed 200 OK in 10ms (Views: 10.1ms | ActiveRecord: 0.0ms | Allocations: 18596)
+Started POST "/sessions" for 127.0.0.1 at 2023-03-13 08:51:48 +0300
+Processing by SessionsController#create as HTML
+  Parameters: {"username"=>"ted", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+Redirected to http://www.example.com/home
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms | Allocations: 308)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "gruberman"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ed"], ["last_name", "Gruberman"], ["role", 2], ["username", "gruberman"], ["password_digest", "$2a$04$FNonHdRcd5.3OJ6NxqKX5OYItOLCGIM2CMdvCuUqJLD5qxdLT/IeS"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/users/new" for 127.0.0.1 at 2023-03-13 08:51:48 +0300
+Processing by UsersController#new as HTML
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_fields.html.erb (Duration: 2.2ms | Allocations: 4608)
+  Rendered partials/_form_structure.html.erb (Duration: 2.7ms | Allocations: 5042)
+  Rendered users/new.html.erb within layouts/application (Duration: 3.8ms | Allocations: 5178)
+  Rendered partials/_topbar.html.erb (Duration: 0.4ms | Allocations: 499)
+  Rendered partials/_nav.html.erb (Duration: 0.2ms | Allocations: 399)
+  Rendered partials/_flash.html.erb (Duration: 0.0ms | Allocations: 33)
+  Rendered partials/_footer.html.erb (Duration: 0.1ms | Allocations: 171)
+  Rendered layout layouts/application.html.erb (Duration: 12.1ms | Allocations: 19187)
+Completed 200 OK in 13ms (Views: 12.3ms | ActiveRecord: 0.0ms | Allocations: 19885)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------------------
+UsersControllerTest: test_should_create_user
+--------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ted"], ["last_name", "Gruberman"], ["role", 1], ["username", "ted"], ["password_digest", "$2a$04$n0oVqRVaEhpn1twkc32n2OVc43J0FKembWJ/fW7T1iUs.LZX9S53W"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2023-03-13 08:51:48 +0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.0ms | Allocations: 4681)
+  Rendered partials/_topbar.html.erb (Duration: 0.5ms | Allocations: 500)
+  Rendered partials/_nav_guest.html.erb (Duration: 0.0ms | Allocations: 42)
+  Rendered partials/_flash.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered partials/_footer.html.erb (Duration: 0.1ms | Allocations: 171)
+  Rendered layout layouts/application.html.erb (Duration: 9.2ms | Allocations: 18400)
+Completed 200 OK in 9ms (Views: 9.3ms | ActiveRecord: 0.0ms | Allocations: 18596)
+Started POST "/sessions" for 127.0.0.1 at 2023-03-13 08:51:48 +0300
+Processing by SessionsController#create as HTML
+  Parameters: {"username"=>"ted", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+Redirected to http://www.example.com/home
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms | Allocations: 308)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "gruberman"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ed"], ["last_name", "Gruberman"], ["role", 2], ["username", "gruberman"], ["password_digest", "$2a$04$vLZwfFed3USWrzepulhMkeSyxMujQ3ADqQ6G5q1mQcHUNCXuxwdES"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+Started POST "/users" for 127.0.0.1 at 2023-03-13 08:51:48 +0300
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"first_name"=>"Eric", "last_name"=>"Gruberman", "username"=>"eric", "role"=>"owner", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "active"=>"true"}}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "eric"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Eric"], ["last_name", "Gruberman"], ["role", 3], ["username", "eric"], ["password_digest", "$2a$04$.XMhkdpdmdzd3v6mbgKWbuHEEvi2JqipBKP2/GNTucqNbHJ5gBW4W"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/users
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms | Allocations: 1185)
+  [1m[36mUser Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+Started POST "/users" for 127.0.0.1 at 2023-03-13 08:51:48 +0300
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"first_name"=>"Eric", "last_name"=>"Gruberman", "username"=>nil, "role"=>"owner", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "active"=>"true"}}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_fields.html.erb (Duration: 2.7ms | Allocations: 5298)
+  Rendered partials/_form_structure.html.erb (Duration: 3.1ms | Allocations: 5763)
+  Rendered users/new.html.erb within layouts/application (Duration: 3.2ms | Allocations: 5813)
+  Rendered partials/_topbar.html.erb (Duration: 0.6ms | Allocations: 502)
+  Rendered partials/_nav.html.erb (Duration: 0.2ms | Allocations: 399)
+  Rendered partials/_flash.html.erb (Duration: 0.0ms | Allocations: 34)
+  Rendered partials/_footer.html.erb (Duration: 0.1ms | Allocations: 171)
+  Rendered layout layouts/application.html.erb (Duration: 12.2ms | Allocations: 19843)
+Completed 200 OK in 15ms (Views: 12.4ms | ActiveRecord: 0.1ms | Allocations: 21721)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+-------------------------------------------------
+UsersControllerTest: test_should_not_destroy_user
+-------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ted"], ["last_name", "Gruberman"], ["role", 1], ["username", "ted"], ["password_digest", "$2a$04$wPUZ8HwZB6MB6JrniiXrsODVIuzFNNTVMuUfkhi.SRdffGYHluDY2"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2023-03-13 08:51:48 +0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.2ms | Allocations: 4682)
+  Rendered partials/_topbar.html.erb (Duration: 0.6ms | Allocations: 500)
+  Rendered partials/_nav_guest.html.erb (Duration: 0.0ms | Allocations: 43)
+  Rendered partials/_flash.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered partials/_footer.html.erb (Duration: 0.1ms | Allocations: 171)
+  Rendered layout layouts/application.html.erb (Duration: 10.6ms | Allocations: 18411)
+Completed 200 OK in 11ms (Views: 10.8ms | ActiveRecord: 0.0ms | Allocations: 18608)
+Started POST "/sessions" for 127.0.0.1 at 2023-03-13 08:51:48 +0300
+Processing by SessionsController#create as HTML
+  Parameters: {"username"=>"ted", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+Redirected to http://www.example.com/home
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms | Allocations: 308)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "gruberman"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ed"], ["last_name", "Gruberman"], ["role", 2], ["username", "gruberman"], ["password_digest", "$2a$04$f34j8qtZQgJstr0y/WCCuO466H8j5JvhMIBTHCxMxczBn2hAyVVfe"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+Started DELETE "/users/2" for 127.0.0.1 at 2023-03-13 08:51:48 +0300
+Processing by UsersController#destroy as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Destroy (0.1ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 2]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/users
+Completed 302 Found in 1ms (ActiveRecord: 0.1ms | Allocations: 893)
+  [1m[36mUser Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+----------------------------------------------------------------------------------------------
+AbilityTest: test_: Within context should verify the abilities of guest users to read crimes. 
+----------------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+---------------------------------------------------------------------------------------
+AbilityTest: test_: Within context should verify the abilities of owner users in PATS. 
+---------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "alex"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Alex"], ["last_name", "Heimann"], ["role", 3], ["username", "alex"], ["password_digest", "$2a$04$ymrMlfYumL5hDsJBfJa5b.pSSzl5FaapLgfFDQffvTtPhtp3XKkai"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "rachel"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Rachel"], ["last_name", "Heimann"], ["role", 3], ["username", "rachel"], ["password_digest", "$2a$04$ZNhxBvniz.ol9QHNCUKxYOABXLECmwhD5XFsFe33BdvIsIH/Xl0mW"], ["active", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "mark"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Mark"], ["last_name", "Heimann"], ["role", 3], ["username", "mark"], ["password_digest", "$2a$04$3.HkBRPM//AkCaQYkRxEtOXZJPZObb3E7.YYstQyce4kHkZ/QZ.1i"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.1ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Alex"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "8336567303"], ["email", "alex.heimann@example.com"], ["active", 1], ["user_id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.0ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Rachel"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "8007954878"], ["email", "rachel.heimann@example.com"], ["active", 0], ["user_id", 2]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.0ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Mark"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "4122688211"], ["email", "mark.heimann@example.com"], ["active", 1], ["user_id", 3]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAnimal Create (0.2ms)[0m  [1m[32mINSERT INTO "animals" ("name", "active") VALUES (?, ?)[0m  [["name", "Cat"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAnimal Create (0.0ms)[0m  [1m[32mINSERT INTO "animals" ("name", "active") VALUES (?, ?)[0m  [["name", "Dog"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAnimal Create (0.0ms)[0m  [1m[32mINSERT INTO "animals" ("name", "active") VALUES (?, ?)[0m  [["name", "Bird"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAnimal Create (0.0ms)[0m  [1m[32mINSERT INTO "animals" ("name", "active") VALUES (?, ?)[0m  [["name", "Ferret"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAnimal Create (0.1ms)[0m  [1m[32mINSERT INTO "animals" ("name", "active") VALUES (?, ?)[0m  [["name", "Rabbit"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAnimal Create (0.0ms)[0m  [1m[32mINSERT INTO "animals" ("name", "active") VALUES (?, ?)[0m  [["name", "Turtle"], ["active", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAnimal Load (0.0ms)[0m  [1m[34mSELECT "animals".* FROM "animals" WHERE "animals"."active" = ?[0m  [["active", 1]]
+  [1m[36mOwner Load (0.0ms)[0m  [1m[34mSELECT "owners".* FROM "owners" WHERE "owners"."active" = ?[0m  [["active", 1]]
+  [1m[36mPet Create (0.3ms)[0m  [1m[32mINSERT INTO "pets" ("name", "animal_id", "owner_id", "female", "date_of_birth", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Dusty"], ["animal_id", 1], ["owner_id", 1], ["female", 0], ["date_of_birth", "2013-03-13"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAnimal Load (0.0ms)[0m  [1m[34mSELECT "animals".* FROM "animals" WHERE "animals"."active" = ?[0m  [["active", 1]]
+  [1m[36mOwner Load (0.0ms)[0m  [1m[34mSELECT "owners".* FROM "owners" WHERE "owners"."active" = ?[0m  [["active", 1]]
+  [1m[36mPet Create (0.0ms)[0m  [1m[32mINSERT INTO "pets" ("name", "animal_id", "owner_id", "female", "date_of_birth", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Polo"], ["animal_id", 1], ["owner_id", 1], ["female", 1], ["date_of_birth", "2013-03-13"], ["active", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAnimal Load (0.0ms)[0m  [1m[34mSELECT "animals".* FROM "animals" WHERE "animals"."active" = ?[0m  [["active", 1]]
+  [1m[36mOwner Load (0.0ms)[0m  [1m[34mSELECT "owners".* FROM "owners" WHERE "owners"."active" = ?[0m  [["active", 1]]
+  [1m[36mPet Create (0.0ms)[0m  [1m[32mINSERT INTO "pets" ("name", "animal_id", "owner_id", "female", "date_of_birth", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Pork Chop"], ["animal_id", 2], ["owner_id", 3], ["female", 1], ["date_of_birth", "2013-03-13"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mVisit Create (0.1ms)[0m  [1m[32mINSERT INTO "visits" ("pet_id", "date", "weight", "overnight_stay", "total_charge") VALUES (?, ?, ?, ?, ?)[0m  [["pet_id", 1], ["date", "2022-09-13"], ["weight", 5.0], ["overnight_stay", 0], ["total_charge", 5000]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mVisit Create (0.0ms)[0m  [1m[32mINSERT INTO "visits" ("pet_id", "date", "weight", "overnight_stay", "total_charge") VALUES (?, ?, ?, ?, ?)[0m  [["pet_id", 2], ["date", "2022-10-13"], ["weight", 5.0], ["overnight_stay", 0], ["total_charge", 5000]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mVisit Create (0.0ms)[0m  [1m[32mINSERT INTO "visits" ("pet_id", "date", "weight", "overnight_stay", "total_charge") VALUES (?, ?, ?, ?, ?)[0m  [["pet_id", 2], ["date", "2023-01-13"], ["weight", 5.0], ["overnight_stay", 0], ["total_charge", 5000]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProcedure Create (0.2ms)[0m  [1m[32mINSERT INTO "procedures" ("name", "description", "length_of_time", "active") VALUES (?, ?, ?, ?)[0m  [["name", "Check-up"], ["description", "A complete check-up of pet."], ["length_of_time", 15], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProcedure Create (0.0ms)[0m  [1m[32mINSERT INTO "procedures" ("name", "description", "length_of_time", "active") VALUES (?, ?, ?, ?)[0m  [["name", "X-ray"], ["description", "X-ray taken of the pet."], ["length_of_time", 15], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProcedure Create (0.0ms)[0m  [1m[32mINSERT INTO "procedures" ("name", "description", "length_of_time", "active") VALUES (?, ?, ?, ?)[0m  [["name", "Dental Work"], ["description", "Dental work for the pet."], ["length_of_time", 15], ["active", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProcedureCost Load (0.0ms)[0m  [1m[34mSELECT "procedure_costs".* FROM "procedure_costs" WHERE "procedure_costs"."end_date" IS NULL AND "procedure_costs"."procedure_id" = ? LIMIT ?[0m  [["procedure_id", 1], ["LIMIT", 1]]
+  [1m[36mProcedureCost Create (0.1ms)[0m  [1m[32mINSERT INTO "procedure_costs" ("procedure_id", "cost", "start_date", "end_date") VALUES (?, ?, ?, ?)[0m  [["procedure_id", 1], ["cost", 2500], ["start_date", "2022-03-13"], ["end_date", nil]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProcedureCost Load (0.0ms)[0m  [1m[34mSELECT "procedure_costs".* FROM "procedure_costs" WHERE "procedure_costs"."end_date" IS NULL AND "procedure_costs"."procedure_id" = ? LIMIT ?[0m  [["procedure_id", 1], ["LIMIT", 1]]
+  [1m[36mProcedureCost Update (0.0ms)[0m  [1m[33mUPDATE "procedure_costs" SET "end_date" = ? WHERE "procedure_costs"."id" = ?[0m  [["end_date", "2022-09-13"], ["id", 1]]
+  [1m[36mProcedureCost Create (0.0ms)[0m  [1m[32mINSERT INTO "procedure_costs" ("procedure_id", "cost", "start_date", "end_date") VALUES (?, ?, ?, ?)[0m  [["procedure_id", 1], ["cost", 3000], ["start_date", "2022-09-13"], ["end_date", nil]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProcedureCost Load (0.0ms)[0m  [1m[34mSELECT "procedure_costs".* FROM "procedure_costs" WHERE "procedure_costs"."end_date" IS NULL AND "procedure_costs"."procedure_id" = ? LIMIT ?[0m  [["procedure_id", 2], ["LIMIT", 1]]
+  [1m[36mProcedureCost Create (0.0ms)[0m  [1m[32mINSERT INTO "procedure_costs" ("procedure_id", "cost", "start_date", "end_date") VALUES (?, ?, ?, ?)[0m  [["procedure_id", 2], ["cost", 4000], ["start_date", "2022-04-13"], ["end_date", nil]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProcedureCost Load (0.0ms)[0m  [1m[34mSELECT "procedure_costs".* FROM "procedure_costs" WHERE "procedure_costs"."end_date" IS NULL AND "procedure_costs"."procedure_id" = ? LIMIT ?[0m  [["procedure_id", 3], ["LIMIT", 1]]
+  [1m[36mProcedureCost Create (0.0ms)[0m  [1m[32mINSERT INTO "procedure_costs" ("procedure_id", "cost", "start_date", "end_date") VALUES (?, ?, ?, ?)[0m  [["procedure_id", 3], ["cost", 2000], ["start_date", "2022-05-13"], ["end_date", nil]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProcedureCost Update (0.0ms)[0m  [1m[33mUPDATE "procedure_costs" SET "end_date" = ? WHERE "procedure_costs"."id" = ?[0m  [["end_date", "2022-09-13"], ["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProcedureCost Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "procedure_costs" WHERE "procedure_costs"."procedure_id" = ? AND (start_date <= '2022-10-13' AND (end_date > '2022-10-13' OR end_date IS NULL)) LIMIT ?[0m  [["procedure_id", 1], ["LIMIT", 1]]
+  [1m[36mProcedureCost Load (0.0ms)[0m  [1m[34mSELECT "procedure_costs".* FROM "procedure_costs" WHERE "procedure_costs"."procedure_id" = ? AND (start_date <= '2022-10-13' AND (end_date > '2022-10-13' OR end_date IS NULL)) ORDER BY "procedure_costs"."id" ASC LIMIT ?[0m  [["procedure_id", 1], ["LIMIT", 1]]
+  [1m[36mVisit Update (0.0ms)[0m  [1m[33mUPDATE "visits" SET "total_charge" = ? WHERE "visits"."id" = ?[0m  [["total_charge", 8000], ["id", 2]]
+  [1m[36mTreatment Create (0.1ms)[0m  [1m[32mINSERT INTO "treatments" ("visit_id", "procedure_id", "successful", "discount") VALUES (?, ?, ?, ?)[0m  [["visit_id", 2], ["procedure_id", 1], ["successful", 1], ["discount", 0.0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProcedureCost Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "procedure_costs" WHERE "procedure_costs"."procedure_id" = ? AND (start_date <= '2022-10-13' AND (end_date > '2022-10-13' OR end_date IS NULL)) LIMIT ?[0m  [["procedure_id", 2], ["LIMIT", 1]]
+  [1m[36mProcedureCost Load (0.0ms)[0m  [1m[34mSELECT "procedure_costs".* FROM "procedure_costs" WHERE "procedure_costs"."procedure_id" = ? AND (start_date <= '2022-10-13' AND (end_date > '2022-10-13' OR end_date IS NULL)) ORDER BY "procedure_costs"."id" ASC LIMIT ?[0m  [["procedure_id", 2], ["LIMIT", 1]]
+  [1m[36mVisit Update (0.0ms)[0m  [1m[33mUPDATE "visits" SET "total_charge" = ? WHERE "visits"."id" = ?[0m  [["total_charge", 11600], ["id", 2]]
+  [1m[36mTreatment Create (0.0ms)[0m  [1m[32mINSERT INTO "treatments" ("visit_id", "procedure_id", "successful", "discount") VALUES (?, ?, ?, ?)[0m  [["visit_id", 2], ["procedure_id", 2], ["successful", 1], ["discount", 0.1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProcedureCost Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "procedure_costs" WHERE "procedure_costs"."procedure_id" = ? AND (start_date <= '2022-09-13' AND (end_date > '2022-09-13' OR end_date IS NULL)) LIMIT ?[0m  [["procedure_id", 1], ["LIMIT", 1]]
+  [1m[36mProcedureCost Load (0.0ms)[0m  [1m[34mSELECT "procedure_costs".* FROM "procedure_costs" WHERE "procedure_costs"."procedure_id" = ? AND (start_date <= '2022-09-13' AND (end_date > '2022-09-13' OR end_date IS NULL)) ORDER BY "procedure_costs"."id" ASC LIMIT ?[0m  [["procedure_id", 1], ["LIMIT", 1]]
+  [1m[36mVisit Update (0.0ms)[0m  [1m[33mUPDATE "visits" SET "total_charge" = ? WHERE "visits"."id" = ?[0m  [["total_charge", 8000], ["id", 1]]
+  [1m[36mTreatment Create (0.0ms)[0m  [1m[32mINSERT INTO "treatments" ("visit_id", "procedure_id", "successful", "discount") VALUES (?, ?, ?, ?)[0m  [["visit_id", 1], ["procedure_id", 1], ["successful", 1], ["discount", 0.0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMedicine Create (0.3ms)[0m  [1m[32mINSERT INTO "medicines" ("name", "description", "stock_amount", "admin_method", "unit", "vaccine", "active") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Rabies"], ["description", "A potent medicine for vaccinating animals against rabies"], ["stock_amount", 10000], ["admin_method", "2"], ["unit", "milliliters"], ["vaccine", 1], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMedicine Create (0.0ms)[0m  [1m[32mINSERT INTO "medicines" ("name", "description", "stock_amount", "admin_method", "unit", "vaccine", "active") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Carprofen"], ["description", "Used to relieve pain and inflammation in dogs. Annedotal reports of severe GI effects in cats."], ["stock_amount", 50], ["admin_method", "2"], ["unit", "milliliters"], ["vaccine", 0], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMedicine Create (0.0ms)[0m  [1m[32mINSERT INTO "medicines" ("name", "description", "stock_amount", "admin_method", "unit", "vaccine", "active") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Amoxicillin"], ["description", "Antibiotic indicated for susceptible gram positive and gram negative infections. Ineffective against species that produce beta-lactamase."], ["stock_amount", 10000], ["admin_method", "2"], ["unit", "milliliters"], ["vaccine", 0], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMedicineCost Load (0.0ms)[0m  [1m[34mSELECT "medicine_costs".* FROM "medicine_costs" WHERE (end_date IS NULL) AND "medicine_costs"."medicine_id" = ? LIMIT ?[0m  [["medicine_id", 1], ["LIMIT", 1]]
+  [1m[36mMedicineCost Create (0.2ms)[0m  [1m[32mINSERT INTO "medicine_costs" ("medicine_id", "cost_per_unit", "start_date", "end_date") VALUES (?, ?, ?, ?)[0m  [["medicine_id", 1], ["cost_per_unit", 25], ["start_date", "2022-03-13"], ["end_date", nil]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMedicineCost Load (0.2ms)[0m  [1m[34mSELECT "medicine_costs".* FROM "medicine_costs" WHERE (end_date IS NULL) AND "medicine_costs"."medicine_id" = ? LIMIT ?[0m  [["medicine_id", 1], ["LIMIT", 1]]
+  [1m[36mMedicineCost Update (0.0ms)[0m  [1m[33mUPDATE "medicine_costs" SET "end_date" = ? WHERE "medicine_costs"."id" = ?[0m  [["end_date", "2022-09-13"], ["id", 1]]
+  [1m[36mMedicineCost Create (0.0ms)[0m  [1m[32mINSERT INTO "medicine_costs" ("medicine_id", "cost_per_unit", "start_date", "end_date") VALUES (?, ?, ?, ?)[0m  [["medicine_id", 1], ["cost_per_unit", 30], ["start_date", "2022-09-13"], ["end_date", nil]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMedicineCost Load (0.0ms)[0m  [1m[34mSELECT "medicine_costs".* FROM "medicine_costs" WHERE (end_date IS NULL) AND "medicine_costs"."medicine_id" = ? LIMIT ?[0m  [["medicine_id", 2], ["LIMIT", 1]]
+  [1m[36mMedicineCost Create (0.0ms)[0m  [1m[32mINSERT INTO "medicine_costs" ("medicine_id", "cost_per_unit", "start_date", "end_date") VALUES (?, ?, ?, ?)[0m  [["medicine_id", 2], ["cost_per_unit", 50], ["start_date", "2022-04-13"], ["end_date", nil]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMedicineCost Load (0.0ms)[0m  [1m[34mSELECT "medicine_costs".* FROM "medicine_costs" WHERE (end_date IS NULL) AND "medicine_costs"."medicine_id" = ? LIMIT ?[0m  [["medicine_id", 3], ["LIMIT", 1]]
+  [1m[36mMedicineCost Create (0.0ms)[0m  [1m[32mINSERT INTO "medicine_costs" ("medicine_id", "cost_per_unit", "start_date", "end_date") VALUES (?, ?, ?, ?)[0m  [["medicine_id", 3], ["cost_per_unit", 40], ["start_date", "2022-05-13"], ["end_date", nil]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMedicineCost Update (0.0ms)[0m  [1m[33mUPDATE "medicine_costs" SET "end_date" = ? WHERE "medicine_costs"."id" = ?[0m  [["end_date", "2022-09-13"], ["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAnimalMedicine Create (0.3ms)[0m  [1m[32mINSERT INTO "animal_medicines" ("animal_id", "medicine_id", "recommended_num_of_units") VALUES (?, ?, ?)[0m  [["animal_id", 1], ["medicine_id", 1], ["recommended_num_of_units", 100]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAnimalMedicine Create (0.0ms)[0m  [1m[32mINSERT INTO "animal_medicines" ("animal_id", "medicine_id", "recommended_num_of_units") VALUES (?, ?, ?)[0m  [["animal_id", 2], ["medicine_id", 1], ["recommended_num_of_units", 100]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAnimalMedicine Create (0.0ms)[0m  [1m[32mINSERT INTO "animal_medicines" ("animal_id", "medicine_id", "recommended_num_of_units") VALUES (?, ?, ?)[0m  [["animal_id", 2], ["medicine_id", 2], ["recommended_num_of_units", 100]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAnimalMedicine Create (0.0ms)[0m  [1m[32mINSERT INTO "animal_medicines" ("animal_id", "medicine_id", "recommended_num_of_units") VALUES (?, ?, ?)[0m  [["animal_id", 1], ["medicine_id", 3], ["recommended_num_of_units", 100]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAnimalMedicine Create (0.0ms)[0m  [1m[32mINSERT INTO "animal_medicines" ("animal_id", "medicine_id", "recommended_num_of_units") VALUES (?, ?, ?)[0m  [["animal_id", 4], ["medicine_id", 3], ["recommended_num_of_units", 100]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMedicine Load (0.1ms)[0m  [1m[34mSELECT "medicines".* FROM "medicines" WHERE "medicines"."active" = ?[0m  [["active", 1]]
+  [1m[36mMedicine Load (0.1ms)[0m  [1m[34mSELECT "medicines".* FROM "medicines" INNER JOIN "animal_medicines" ON "animal_medicines"."medicine_id" = "medicines"."id" WHERE (animal_medicines.animal_id = 1)[0m
+  [1m[36mMedicineCost Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "medicine_costs" WHERE "medicine_costs"."medicine_id" = ? AND (start_date <= '2022-09-13' AND (end_date > '2022-09-13' OR end_date IS NULL)) LIMIT ?[0m  [["medicine_id", 1], ["LIMIT", 1]]
+  [1m[36mMedicineCost Load (0.0ms)[0m  [1m[34mSELECT "medicine_costs".* FROM "medicine_costs" WHERE "medicine_costs"."medicine_id" = ? AND (start_date <= '2022-09-13' AND (end_date > '2022-09-13' OR end_date IS NULL)) ORDER BY "medicine_costs"."id" ASC LIMIT ?[0m  [["medicine_id", 1], ["LIMIT", 1]]
+  [1m[36mVisit Update (0.0ms)[0m  [1m[33mUPDATE "visits" SET "total_charge" = ? WHERE "visits"."id" = ?[0m  [["total_charge", 9500], ["id", 1]]
+  [1m[36mDosage Create (0.1ms)[0m  [1m[32mINSERT INTO "dosages" ("visit_id", "medicine_id", "units_given", "discount") VALUES (?, ?, ?, ?)[0m  [["visit_id", 1], ["medicine_id", 1], ["units_given", 50], ["discount", 0.0]]
+  [1m[36mMedicine Update (0.0ms)[0m  [1m[33mUPDATE "medicines" SET "stock_amount" = ? WHERE "medicines"."id" = ?[0m  [["stock_amount", 9950], ["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMedicine Load (0.0ms)[0m  [1m[34mSELECT "medicines".* FROM "medicines" WHERE "medicines"."active" = ?[0m  [["active", 1]]
+  [1m[36mMedicine Load (0.0ms)[0m  [1m[34mSELECT "medicines".* FROM "medicines" INNER JOIN "animal_medicines" ON "animal_medicines"."medicine_id" = "medicines"."id" WHERE (animal_medicines.animal_id = 1)[0m
+  [1m[36mMedicineCost Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "medicine_costs" WHERE "medicine_costs"."medicine_id" = ? AND (start_date <= '2022-10-13' AND (end_date > '2022-10-13' OR end_date IS NULL)) LIMIT ?[0m  [["medicine_id", 1], ["LIMIT", 1]]
+  [1m[36mMedicineCost Load (0.0ms)[0m  [1m[34mSELECT "medicine_costs".* FROM "medicine_costs" WHERE "medicine_costs"."medicine_id" = ? AND (start_date <= '2022-10-13' AND (end_date > '2022-10-13' OR end_date IS NULL)) ORDER BY "medicine_costs"."id" ASC LIMIT ?[0m  [["medicine_id", 1], ["LIMIT", 1]]
+  [1m[36mVisit Update (0.0ms)[0m  [1m[33mUPDATE "visits" SET "total_charge" = ? WHERE "visits"."id" = ?[0m  [["total_charge", 13100], ["id", 2]]
+  [1m[36mDosage Create (0.0ms)[0m  [1m[32mINSERT INTO "dosages" ("visit_id", "medicine_id", "units_given", "discount") VALUES (?, ?, ?, ?)[0m  [["visit_id", 2], ["medicine_id", 1], ["units_given", 50], ["discount", 0.0]]
+  [1m[36mMedicine Update (0.0ms)[0m  [1m[33mUPDATE "medicines" SET "stock_amount" = ? WHERE "medicines"."id" = ?[0m  [["stock_amount", 9900], ["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMedicine Load (0.0ms)[0m  [1m[34mSELECT "medicines".* FROM "medicines" WHERE "medicines"."active" = ?[0m  [["active", 1]]
+  [1m[36mMedicine Load (0.0ms)[0m  [1m[34mSELECT "medicines".* FROM "medicines" INNER JOIN "animal_medicines" ON "animal_medicines"."medicine_id" = "medicines"."id" WHERE (animal_medicines.animal_id = 1)[0m
+  [1m[36mMedicineCost Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "medicine_costs" WHERE "medicine_costs"."medicine_id" = ? AND (start_date <= '2022-10-13' AND (end_date > '2022-10-13' OR end_date IS NULL)) LIMIT ?[0m  [["medicine_id", 3], ["LIMIT", 1]]
+  [1m[36mMedicineCost Load (0.0ms)[0m  [1m[34mSELECT "medicine_costs".* FROM "medicine_costs" WHERE "medicine_costs"."medicine_id" = ? AND (start_date <= '2022-10-13' AND (end_date > '2022-10-13' OR end_date IS NULL)) ORDER BY "medicine_costs"."id" ASC LIMIT ?[0m  [["medicine_id", 3], ["LIMIT", 1]]
+  [1m[36mVisit Update (0.0ms)[0m  [1m[33mUPDATE "visits" SET "total_charge" = ? WHERE "visits"."id" = ?[0m  [["total_charge", 14900], ["id", 2]]
+  [1m[36mDosage Create (0.0ms)[0m  [1m[32mINSERT INTO "dosages" ("visit_id", "medicine_id", "units_given", "discount") VALUES (?, ?, ?, ?)[0m  [["visit_id", 2], ["medicine_id", 3], ["units_given", 50], ["discount", 0.1]]
+  [1m[36mMedicine Update (0.0ms)[0m  [1m[33mUPDATE "medicines" SET "stock_amount" = ? WHERE "medicines"."id" = ?[0m  [["stock_amount", 9950], ["id", 3]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."owner_id" = ?[0m  [["owner_id", 1]]
+  [1m[36mVisit Load (0.1ms)[0m  [1m[34mSELECT "visits".* FROM "visits" INNER JOIN "pets" ON "visits"."pet_id" = "pets"."id" WHERE "pets"."owner_id" = ?[0m  [["owner_id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mVisit Create (0.0ms)[0m  [1m[32mINSERT INTO "visits" ("pet_id", "date", "weight", "overnight_stay", "total_charge") VALUES (?, ?, ?, ?, ?)[0m  [["pet_id", 3], ["date", "2022-09-13"], ["weight", 5.0], ["overnight_stay", 0], ["total_charge", 5000]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mVisit Destroy (0.0ms)[0m  [1m[31mDELETE FROM "visits" WHERE "visits"."id" = ?[0m  [["id", 4]]
+  [1m[36mDosage Destroy (0.0ms)[0m  [1m[31mDELETE FROM "dosages" WHERE "dosages"."id" = ?[0m  [["id", 1]]
+  [1m[36mDosage Destroy (0.0ms)[0m  [1m[31mDELETE FROM "dosages" WHERE "dosages"."id" = ?[0m  [["id", 2]]
+  [1m[36mDosage Destroy (0.0ms)[0m  [1m[31mDELETE FROM "dosages" WHERE "dosages"."id" = ?[0m  [["id", 3]]
+  [1m[36mAnimalMedicine Destroy (0.0ms)[0m  [1m[31mDELETE FROM "animal_medicines" WHERE "animal_medicines"."id" = ?[0m  [["id", 1]]
+  [1m[36mAnimalMedicine Destroy (0.0ms)[0m  [1m[31mDELETE FROM "animal_medicines" WHERE "animal_medicines"."id" = ?[0m  [["id", 2]]
+  [1m[36mAnimalMedicine Destroy (0.0ms)[0m  [1m[31mDELETE FROM "animal_medicines" WHERE "animal_medicines"."id" = ?[0m  [["id", 3]]
+  [1m[36mAnimalMedicine Destroy (0.0ms)[0m  [1m[31mDELETE FROM "animal_medicines" WHERE "animal_medicines"."id" = ?[0m  [["id", 4]]
+  [1m[36mAnimalMedicine Destroy (0.0ms)[0m  [1m[31mDELETE FROM "animal_medicines" WHERE "animal_medicines"."id" = ?[0m  [["id", 5]]
+  [1m[36mMedicineCost Destroy (0.0ms)[0m  [1m[31mDELETE FROM "medicine_costs" WHERE "medicine_costs"."id" = ?[0m  [["id", 1]]
+  [1m[36mMedicineCost Destroy (0.0ms)[0m  [1m[31mDELETE FROM "medicine_costs" WHERE "medicine_costs"."id" = ?[0m  [["id", 2]]
+  [1m[36mMedicineCost Destroy (0.0ms)[0m  [1m[31mDELETE FROM "medicine_costs" WHERE "medicine_costs"."id" = ?[0m  [["id", 3]]
+  [1m[36mMedicineCost Destroy (0.0ms)[0m  [1m[31mDELETE FROM "medicine_costs" WHERE "medicine_costs"."id" = ?[0m  [["id", 4]]
+  [1m[36mMedicine Destroy (0.0ms)[0m  [1m[31mDELETE FROM "medicines" WHERE "medicines"."id" = ?[0m  [["id", 1]]
+  [1m[36mMedicine Destroy (0.0ms)[0m  [1m[31mDELETE FROM "medicines" WHERE "medicines"."id" = ?[0m  [["id", 2]]
+  [1m[36mMedicine Destroy (0.0ms)[0m  [1m[31mDELETE FROM "medicines" WHERE "medicines"."id" = ?[0m  [["id", 3]]
+  [1m[36mTreatment Destroy (0.0ms)[0m  [1m[31mDELETE FROM "treatments" WHERE "treatments"."id" = ?[0m  [["id", 3]]
+  [1m[36mTreatment Destroy (0.0ms)[0m  [1m[31mDELETE FROM "treatments" WHERE "treatments"."id" = ?[0m  [["id", 1]]
+  [1m[36mTreatment Destroy (0.0ms)[0m  [1m[31mDELETE FROM "treatments" WHERE "treatments"."id" = ?[0m  [["id", 2]]
+  [1m[36mProcedureCost Destroy (0.0ms)[0m  [1m[31mDELETE FROM "procedure_costs" WHERE "procedure_costs"."id" = ?[0m  [["id", 1]]
+  [1m[36mProcedureCost Destroy (0.0ms)[0m  [1m[31mDELETE FROM "procedure_costs" WHERE "procedure_costs"."id" = ?[0m  [["id", 2]]
+  [1m[36mProcedureCost Destroy (0.0ms)[0m  [1m[31mDELETE FROM "procedure_costs" WHERE "procedure_costs"."id" = ?[0m  [["id", 3]]
+  [1m[36mProcedureCost Destroy (0.0ms)[0m  [1m[31mDELETE FROM "procedure_costs" WHERE "procedure_costs"."id" = ?[0m  [["id", 4]]
+  [1m[36mProcedure Destroy (0.0ms)[0m  [1m[31mDELETE FROM "procedures" WHERE "procedures"."id" = ?[0m  [["id", 1]]
+  [1m[36mProcedure Destroy (0.0ms)[0m  [1m[31mDELETE FROM "procedures" WHERE "procedures"."id" = ?[0m  [["id", 2]]
+  [1m[36mProcedure Destroy (0.0ms)[0m  [1m[31mDELETE FROM "procedures" WHERE "procedures"."id" = ?[0m  [["id", 3]]
+  [1m[36mVisit Destroy (0.0ms)[0m  [1m[31mDELETE FROM "visits" WHERE "visits"."id" = ?[0m  [["id", 1]]
+  [1m[36mVisit Destroy (0.0ms)[0m  [1m[31mDELETE FROM "visits" WHERE "visits"."id" = ?[0m  [["id", 2]]
+  [1m[36mVisit Destroy (0.0ms)[0m  [1m[31mDELETE FROM "visits" WHERE "visits"."id" = ?[0m  [["id", 3]]
+  [1m[36mPet Destroy (0.0ms)[0m  [1m[31mDELETE FROM "pets" WHERE "pets"."id" = ?[0m  [["id", 1]]
+  [1m[36mPet Destroy (0.0ms)[0m  [1m[31mDELETE FROM "pets" WHERE "pets"."id" = ?[0m  [["id", 2]]
+  [1m[36mPet Destroy (0.0ms)[0m  [1m[31mDELETE FROM "pets" WHERE "pets"."id" = ?[0m  [["id", 3]]
+  [1m[36mAnimal Destroy (0.0ms)[0m  [1m[31mDELETE FROM "animals" WHERE "animals"."id" = ?[0m  [["id", 1]]
+  [1m[36mAnimal Destroy (0.0ms)[0m  [1m[31mDELETE FROM "animals" WHERE "animals"."id" = ?[0m  [["id", 2]]
+  [1m[36mAnimal Destroy (0.0ms)[0m  [1m[31mDELETE FROM "animals" WHERE "animals"."id" = ?[0m  [["id", 3]]
+  [1m[36mAnimal Destroy (0.0ms)[0m  [1m[31mDELETE FROM "animals" WHERE "animals"."id" = ?[0m  [["id", 4]]
+  [1m[36mAnimal Destroy (0.0ms)[0m  [1m[31mDELETE FROM "animals" WHERE "animals"."id" = ?[0m  [["id", 5]]
+  [1m[36mAnimal Destroy (0.0ms)[0m  [1m[31mDELETE FROM "animals" WHERE "animals"."id" = ?[0m  [["id", 6]]
+  [1m[36mOwner Destroy (0.0ms)[0m  [1m[31mDELETE FROM "owners" WHERE "owners"."id" = ?[0m  [["id", 2]]
+  [1m[36mOwner Destroy (0.0ms)[0m  [1m[31mDELETE FROM "owners" WHERE "owners"."id" = ?[0m  [["id", 3]]
+  [1m[36mOwner Destroy (0.0ms)[0m  [1m[31mDELETE FROM "owners" WHERE "owners"."id" = ?[0m  [["id", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+----------------------------------------------------------------------------------------------
+AbilityTest: test_: Within context should verify the abilities of vet users to do everything. 
+----------------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "vet"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ed"], ["last_name", "Gruberman"], ["role", 1], ["username", "vet"], ["password_digest", "$2a$04$hCiudX8SM74qGRuWePCNbeG7q4XrlF2sV394/RUw/7P5kvmn7C/uW"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Destroy (0.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+-------------------------------------------------------------------------------------------
+AbilityTest: test_: Within context should verify the abilities of assistant users in PATS. 
+-------------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "gruberman"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ed"], ["last_name", "Gruberman"], ["role", 2], ["username", "gruberman"], ["password_digest", "$2a$04$jkG1VeQ1hUx0LT2ntY9t7escn.0fpMXJpL1uypetI6dA6fsZAGm/K"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "ted"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ted"], ["last_name", "Gruberman"], ["role", 2], ["username", "ted"], ["password_digest", "$2a$04$yZ5ryIsx0I4LvoBqLWF0hO78b6FiT/fBxOSO7ryKg86x6s0RL9OP6"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAnimal Create (0.1ms)[0m  [1m[32mINSERT INTO "animals" ("name", "active") VALUES (?, ?)[0m  [["name", "Cat"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAnimal Create (0.0ms)[0m  [1m[32mINSERT INTO "animals" ("name", "active") VALUES (?, ?)[0m  [["name", "Dog"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAnimal Create (0.0ms)[0m  [1m[32mINSERT INTO "animals" ("name", "active") VALUES (?, ?)[0m  [["name", "Bird"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAnimal Create (0.0ms)[0m  [1m[32mINSERT INTO "animals" ("name", "active") VALUES (?, ?)[0m  [["name", "Ferret"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAnimal Create (0.0ms)[0m  [1m[32mINSERT INTO "animals" ("name", "active") VALUES (?, ?)[0m  [["name", "Rabbit"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAnimal Create (0.0ms)[0m  [1m[32mINSERT INTO "animals" ("name", "active") VALUES (?, ?)[0m  [["name", "Turtle"], ["active", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "alex"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Alex"], ["last_name", "Heimann"], ["role", 3], ["username", "alex"], ["password_digest", "$2a$04$CzUfDjmRL8KdHbc89yh43uyAi69BOb3Htu1d6m5s..gi3QuxF/CG2"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "rachel"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Rachel"], ["last_name", "Heimann"], ["role", 3], ["username", "rachel"], ["password_digest", "$2a$04$BACSqhdWUWcjA.JmtT9lQeV40BMhTx1eJ3eNIGmyViuyvKixk28gi"], ["active", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "mark"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "role", "username", "password_digest", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Mark"], ["last_name", "Heimann"], ["role", 3], ["username", "mark"], ["password_digest", "$2a$04$VralhAjI9LCAZpcmW0Lcm.BQASQsD/cnc6pYdfpcfPn/SxMPwzurC"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.1ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Alex"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "6242929363"], ["email", "alex.heimann@example.com"], ["active", 1], ["user_id", 3]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.0ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Rachel"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "3158646591"], ["email", "rachel.heimann@example.com"], ["active", 0], ["user_id", 4]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOwner Create (0.0ms)[0m  [1m[32mINSERT INTO "owners" ("first_name", "last_name", "street", "city", "state", "zip", "phone", "email", "active", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Mark"], ["last_name", "Heimann"], ["street", "10152 Sudberry Drive"], ["city", "Wexford"], ["state", "PA"], ["zip", "15090"], ["phone", "4122688211"], ["email", "mark.heimann@example.com"], ["active", 1], ["user_id", 5]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAnimal Load (0.0ms)[0m  [1m[34mSELECT "animals".* FROM "animals" WHERE "animals"."active" = ?[0m  [["active", 1]]
+  [1m[36mOwner Load (0.0ms)[0m  [1m[34mSELECT "owners".* FROM "owners" WHERE "owners"."active" = ?[0m  [["active", 1]]
+  [1m[36mPet Create (0.1ms)[0m  [1m[32mINSERT INTO "pets" ("name", "animal_id", "owner_id", "female", "date_of_birth", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Dusty"], ["animal_id", 1], ["owner_id", 1], ["female", 0], ["date_of_birth", "2013-03-13"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAnimal Load (0.0ms)[0m  [1m[34mSELECT "animals".* FROM "animals" WHERE "animals"."active" = ?[0m  [["active", 1]]
+  [1m[36mOwner Load (0.0ms)[0m  [1m[34mSELECT "owners".* FROM "owners" WHERE "owners"."active" = ?[0m  [["active", 1]]
+  [1m[36mPet Create (0.0ms)[0m  [1m[32mINSERT INTO "pets" ("name", "animal_id", "owner_id", "female", "date_of_birth", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Polo"], ["animal_id", 1], ["owner_id", 1], ["female", 1], ["date_of_birth", "2013-03-13"], ["active", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAnimal Load (0.0ms)[0m  [1m[34mSELECT "animals".* FROM "animals" WHERE "animals"."active" = ?[0m  [["active", 1]]
+  [1m[36mOwner Load (0.0ms)[0m  [1m[34mSELECT "owners".* FROM "owners" WHERE "owners"."active" = ?[0m  [["active", 1]]
+  [1m[36mPet Create (0.0ms)[0m  [1m[32mINSERT INTO "pets" ("name", "animal_id", "owner_id", "female", "date_of_birth", "active") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Pork Chop"], ["animal_id", 2], ["owner_id", 3], ["female", 1], ["date_of_birth", "2013-03-13"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mVisit Create (0.1ms)[0m  [1m[32mINSERT INTO "visits" ("pet_id", "date", "weight", "overnight_stay", "total_charge") VALUES (?, ?, ?, ?, ?)[0m  [["pet_id", 1], ["date", "2022-09-13"], ["weight", 5.0], ["overnight_stay", 0], ["total_charge", 5000]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mVisit Create (0.0ms)[0m  [1m[32mINSERT INTO "visits" ("pet_id", "date", "weight", "overnight_stay", "total_charge") VALUES (?, ?, ?, ?, ?)[0m  [["pet_id", 2], ["date", "2022-10-13"], ["weight", 5.0], ["overnight_stay", 0], ["total_charge", 5000]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mVisit Create (0.0ms)[0m  [1m[32mINSERT INTO "visits" ("pet_id", "date", "weight", "overnight_stay", "total_charge") VALUES (?, ?, ?, ?, ?)[0m  [["pet_id", 2], ["date", "2023-01-13"], ["weight", 5.0], ["overnight_stay", 0], ["total_charge", 5000]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProcedure Create (0.1ms)[0m  [1m[32mINSERT INTO "procedures" ("name", "description", "length_of_time", "active") VALUES (?, ?, ?, ?)[0m  [["name", "Check-up"], ["description", "A complete check-up of pet."], ["length_of_time", 15], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProcedure Create (0.0ms)[0m  [1m[32mINSERT INTO "procedures" ("name", "description", "length_of_time", "active") VALUES (?, ?, ?, ?)[0m  [["name", "X-ray"], ["description", "X-ray taken of the pet."], ["length_of_time", 15], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProcedure Create (0.0ms)[0m  [1m[32mINSERT INTO "procedures" ("name", "description", "length_of_time", "active") VALUES (?, ?, ?, ?)[0m  [["name", "Dental Work"], ["description", "Dental work for the pet."], ["length_of_time", 15], ["active", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProcedureCost Load (0.0ms)[0m  [1m[34mSELECT "procedure_costs".* FROM "procedure_costs" WHERE "procedure_costs"."end_date" IS NULL AND "procedure_costs"."procedure_id" = ? LIMIT ?[0m  [["procedure_id", 1], ["LIMIT", 1]]
+  [1m[36mProcedureCost Create (0.1ms)[0m  [1m[32mINSERT INTO "procedure_costs" ("procedure_id", "cost", "start_date", "end_date") VALUES (?, ?, ?, ?)[0m  [["procedure_id", 1], ["cost", 2500], ["start_date", "2022-03-13"], ["end_date", nil]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProcedureCost Load (0.0ms)[0m  [1m[34mSELECT "procedure_costs".* FROM "procedure_costs" WHERE "procedure_costs"."end_date" IS NULL AND "procedure_costs"."procedure_id" = ? LIMIT ?[0m  [["procedure_id", 1], ["LIMIT", 1]]
+  [1m[36mProcedureCost Update (0.0ms)[0m  [1m[33mUPDATE "procedure_costs" SET "end_date" = ? WHERE "procedure_costs"."id" = ?[0m  [["end_date", "2022-09-13"], ["id", 1]]
+  [1m[36mProcedureCost Create (0.0ms)[0m  [1m[32mINSERT INTO "procedure_costs" ("procedure_id", "cost", "start_date", "end_date") VALUES (?, ?, ?, ?)[0m  [["procedure_id", 1], ["cost", 3000], ["start_date", "2022-09-13"], ["end_date", nil]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProcedureCost Load (0.0ms)[0m  [1m[34mSELECT "procedure_costs".* FROM "procedure_costs" WHERE "procedure_costs"."end_date" IS NULL AND "procedure_costs"."procedure_id" = ? LIMIT ?[0m  [["procedure_id", 2], ["LIMIT", 1]]
+  [1m[36mProcedureCost Create (0.0ms)[0m  [1m[32mINSERT INTO "procedure_costs" ("procedure_id", "cost", "start_date", "end_date") VALUES (?, ?, ?, ?)[0m  [["procedure_id", 2], ["cost", 4000], ["start_date", "2022-04-13"], ["end_date", nil]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProcedureCost Load (0.0ms)[0m  [1m[34mSELECT "procedure_costs".* FROM "procedure_costs" WHERE "procedure_costs"."end_date" IS NULL AND "procedure_costs"."procedure_id" = ? LIMIT ?[0m  [["procedure_id", 3], ["LIMIT", 1]]
+  [1m[36mProcedureCost Create (0.0ms)[0m  [1m[32mINSERT INTO "procedure_costs" ("procedure_id", "cost", "start_date", "end_date") VALUES (?, ?, ?, ?)[0m  [["procedure_id", 3], ["cost", 2000], ["start_date", "2022-05-13"], ["end_date", nil]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProcedureCost Update (0.0ms)[0m  [1m[33mUPDATE "procedure_costs" SET "end_date" = ? WHERE "procedure_costs"."id" = ?[0m  [["end_date", "2022-09-13"], ["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProcedureCost Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "procedure_costs" WHERE "procedure_costs"."procedure_id" = ? AND (start_date <= '2022-10-13' AND (end_date > '2022-10-13' OR end_date IS NULL)) LIMIT ?[0m  [["procedure_id", 1], ["LIMIT", 1]]
+  [1m[36mProcedureCost Load (0.0ms)[0m  [1m[34mSELECT "procedure_costs".* FROM "procedure_costs" WHERE "procedure_costs"."procedure_id" = ? AND (start_date <= '2022-10-13' AND (end_date > '2022-10-13' OR end_date IS NULL)) ORDER BY "procedure_costs"."id" ASC LIMIT ?[0m  [["procedure_id", 1], ["LIMIT", 1]]
+  [1m[36mVisit Update (0.0ms)[0m  [1m[33mUPDATE "visits" SET "total_charge" = ? WHERE "visits"."id" = ?[0m  [["total_charge", 8000], ["id", 2]]
+  [1m[36mTreatment Create (0.1ms)[0m  [1m[32mINSERT INTO "treatments" ("visit_id", "procedure_id", "successful", "discount") VALUES (?, ?, ?, ?)[0m  [["visit_id", 2], ["procedure_id", 1], ["successful", 1], ["discount", 0.0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProcedureCost Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "procedure_costs" WHERE "procedure_costs"."procedure_id" = ? AND (start_date <= '2022-10-13' AND (end_date > '2022-10-13' OR end_date IS NULL)) LIMIT ?[0m  [["procedure_id", 2], ["LIMIT", 1]]
+  [1m[36mProcedureCost Load (0.0ms)[0m  [1m[34mSELECT "procedure_costs".* FROM "procedure_costs" WHERE "procedure_costs"."procedure_id" = ? AND (start_date <= '2022-10-13' AND (end_date > '2022-10-13' OR end_date IS NULL)) ORDER BY "procedure_costs"."id" ASC LIMIT ?[0m  [["procedure_id", 2], ["LIMIT", 1]]
+  [1m[36mVisit Update (0.0ms)[0m  [1m[33mUPDATE "visits" SET "total_charge" = ? WHERE "visits"."id" = ?[0m  [["total_charge", 11600], ["id", 2]]
+  [1m[36mTreatment Create (0.0ms)[0m  [1m[32mINSERT INTO "treatments" ("visit_id", "procedure_id", "successful", "discount") VALUES (?, ?, ?, ?)[0m  [["visit_id", 2], ["procedure_id", 2], ["successful", 1], ["discount", 0.1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProcedureCost Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "procedure_costs" WHERE "procedure_costs"."procedure_id" = ? AND (start_date <= '2022-09-13' AND (end_date > '2022-09-13' OR end_date IS NULL)) LIMIT ?[0m  [["procedure_id", 1], ["LIMIT", 1]]
+  [1m[36mProcedureCost Load (0.0ms)[0m  [1m[34mSELECT "procedure_costs".* FROM "procedure_costs" WHERE "procedure_costs"."procedure_id" = ? AND (start_date <= '2022-09-13' AND (end_date > '2022-09-13' OR end_date IS NULL)) ORDER BY "procedure_costs"."id" ASC LIMIT ?[0m  [["procedure_id", 1], ["LIMIT", 1]]
+  [1m[36mVisit Update (0.0ms)[0m  [1m[33mUPDATE "visits" SET "total_charge" = ? WHERE "visits"."id" = ?[0m  [["total_charge", 8000], ["id", 1]]
+  [1m[36mTreatment Create (0.0ms)[0m  [1m[32mINSERT INTO "treatments" ("visit_id", "procedure_id", "successful", "discount") VALUES (?, ?, ?, ?)[0m  [["visit_id", 1], ["procedure_id", 1], ["successful", 1], ["discount", 0.0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMedicine Create (0.0ms)[0m  [1m[32mINSERT INTO "medicines" ("name", "description", "stock_amount", "admin_method", "unit", "vaccine", "active") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Rabies"], ["description", "A potent medicine for vaccinating animals against rabies"], ["stock_amount", 10000], ["admin_method", "2"], ["unit", "milliliters"], ["vaccine", 1], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMedicine Create (0.0ms)[0m  [1m[32mINSERT INTO "medicines" ("name", "description", "stock_amount", "admin_method", "unit", "vaccine", "active") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Carprofen"], ["description", "Used to relieve pain and inflammation in dogs. Annedotal reports of severe GI effects in cats."], ["stock_amount", 50], ["admin_method", "2"], ["unit", "milliliters"], ["vaccine", 0], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMedicine Create (0.0ms)[0m  [1m[32mINSERT INTO "medicines" ("name", "description", "stock_amount", "admin_method", "unit", "vaccine", "active") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Amoxicillin"], ["description", "Antibiotic indicated for susceptible gram positive and gram negative infections. Ineffective against species that produce beta-lactamase."], ["stock_amount", 10000], ["admin_method", "2"], ["unit", "milliliters"], ["vaccine", 0], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMedicineCost Load (0.0ms)[0m  [1m[34mSELECT "medicine_costs".* FROM "medicine_costs" WHERE (end_date IS NULL) AND "medicine_costs"."medicine_id" = ? LIMIT ?[0m  [["medicine_id", 1], ["LIMIT", 1]]
+  [1m[36mMedicineCost Create (0.1ms)[0m  [1m[32mINSERT INTO "medicine_costs" ("medicine_id", "cost_per_unit", "start_date", "end_date") VALUES (?, ?, ?, ?)[0m  [["medicine_id", 1], ["cost_per_unit", 25], ["start_date", "2022-03-13"], ["end_date", nil]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMedicineCost Load (0.0ms)[0m  [1m[34mSELECT "medicine_costs".* FROM "medicine_costs" WHERE (end_date IS NULL) AND "medicine_costs"."medicine_id" = ? LIMIT ?[0m  [["medicine_id", 1], ["LIMIT", 1]]
+  [1m[36mMedicineCost Update (0.0ms)[0m  [1m[33mUPDATE "medicine_costs" SET "end_date" = ? WHERE "medicine_costs"."id" = ?[0m  [["end_date", "2022-09-13"], ["id", 1]]
+  [1m[36mMedicineCost Create (0.0ms)[0m  [1m[32mINSERT INTO "medicine_costs" ("medicine_id", "cost_per_unit", "start_date", "end_date") VALUES (?, ?, ?, ?)[0m  [["medicine_id", 1], ["cost_per_unit", 30], ["start_date", "2022-09-13"], ["end_date", nil]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMedicineCost Load (0.0ms)[0m  [1m[34mSELECT "medicine_costs".* FROM "medicine_costs" WHERE (end_date IS NULL) AND "medicine_costs"."medicine_id" = ? LIMIT ?[0m  [["medicine_id", 2], ["LIMIT", 1]]
+  [1m[36mMedicineCost Create (0.0ms)[0m  [1m[32mINSERT INTO "medicine_costs" ("medicine_id", "cost_per_unit", "start_date", "end_date") VALUES (?, ?, ?, ?)[0m  [["medicine_id", 2], ["cost_per_unit", 50], ["start_date", "2022-04-13"], ["end_date", nil]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMedicineCost Load (0.0ms)[0m  [1m[34mSELECT "medicine_costs".* FROM "medicine_costs" WHERE (end_date IS NULL) AND "medicine_costs"."medicine_id" = ? LIMIT ?[0m  [["medicine_id", 3], ["LIMIT", 1]]
+  [1m[36mMedicineCost Create (0.0ms)[0m  [1m[32mINSERT INTO "medicine_costs" ("medicine_id", "cost_per_unit", "start_date", "end_date") VALUES (?, ?, ?, ?)[0m  [["medicine_id", 3], ["cost_per_unit", 40], ["start_date", "2022-05-13"], ["end_date", nil]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMedicineCost Update (0.0ms)[0m  [1m[33mUPDATE "medicine_costs" SET "end_date" = ? WHERE "medicine_costs"."id" = ?[0m  [["end_date", "2022-09-13"], ["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAnimalMedicine Create (0.1ms)[0m  [1m[32mINSERT INTO "animal_medicines" ("animal_id", "medicine_id", "recommended_num_of_units") VALUES (?, ?, ?)[0m  [["animal_id", 1], ["medicine_id", 1], ["recommended_num_of_units", 100]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAnimalMedicine Create (0.0ms)[0m  [1m[32mINSERT INTO "animal_medicines" ("animal_id", "medicine_id", "recommended_num_of_units") VALUES (?, ?, ?)[0m  [["animal_id", 2], ["medicine_id", 1], ["recommended_num_of_units", 100]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAnimalMedicine Create (0.0ms)[0m  [1m[32mINSERT INTO "animal_medicines" ("animal_id", "medicine_id", "recommended_num_of_units") VALUES (?, ?, ?)[0m  [["animal_id", 2], ["medicine_id", 2], ["recommended_num_of_units", 100]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAnimalMedicine Create (0.0ms)[0m  [1m[32mINSERT INTO "animal_medicines" ("animal_id", "medicine_id", "recommended_num_of_units") VALUES (?, ?, ?)[0m  [["animal_id", 1], ["medicine_id", 3], ["recommended_num_of_units", 100]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAnimalMedicine Create (0.0ms)[0m  [1m[32mINSERT INTO "animal_medicines" ("animal_id", "medicine_id", "recommended_num_of_units") VALUES (?, ?, ?)[0m  [["animal_id", 4], ["medicine_id", 3], ["recommended_num_of_units", 100]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMedicine Load (0.0ms)[0m  [1m[34mSELECT "medicines".* FROM "medicines" WHERE "medicines"."active" = ?[0m  [["active", 1]]
+  [1m[36mMedicine Load (0.0ms)[0m  [1m[34mSELECT "medicines".* FROM "medicines" INNER JOIN "animal_medicines" ON "animal_medicines"."medicine_id" = "medicines"."id" WHERE (animal_medicines.animal_id = 1)[0m
+  [1m[36mMedicineCost Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "medicine_costs" WHERE "medicine_costs"."medicine_id" = ? AND (start_date <= '2022-09-13' AND (end_date > '2022-09-13' OR end_date IS NULL)) LIMIT ?[0m  [["medicine_id", 1], ["LIMIT", 1]]
+  [1m[36mMedicineCost Load (0.0ms)[0m  [1m[34mSELECT "medicine_costs".* FROM "medicine_costs" WHERE "medicine_costs"."medicine_id" = ? AND (start_date <= '2022-09-13' AND (end_date > '2022-09-13' OR end_date IS NULL)) ORDER BY "medicine_costs"."id" ASC LIMIT ?[0m  [["medicine_id", 1], ["LIMIT", 1]]
+  [1m[36mVisit Update (0.0ms)[0m  [1m[33mUPDATE "visits" SET "total_charge" = ? WHERE "visits"."id" = ?[0m  [["total_charge", 9500], ["id", 1]]
+  [1m[36mDosage Create (0.1ms)[0m  [1m[32mINSERT INTO "dosages" ("visit_id", "medicine_id", "units_given", "discount") VALUES (?, ?, ?, ?)[0m  [["visit_id", 1], ["medicine_id", 1], ["units_given", 50], ["discount", 0.0]]
+  [1m[36mMedicine Update (0.0ms)[0m  [1m[33mUPDATE "medicines" SET "stock_amount" = ? WHERE "medicines"."id" = ?[0m  [["stock_amount", 9950], ["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMedicine Load (0.0ms)[0m  [1m[34mSELECT "medicines".* FROM "medicines" WHERE "medicines"."active" = ?[0m  [["active", 1]]
+  [1m[36mMedicine Load (0.0ms)[0m  [1m[34mSELECT "medicines".* FROM "medicines" INNER JOIN "animal_medicines" ON "animal_medicines"."medicine_id" = "medicines"."id" WHERE (animal_medicines.animal_id = 1)[0m
+  [1m[36mMedicineCost Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "medicine_costs" WHERE "medicine_costs"."medicine_id" = ? AND (start_date <= '2022-10-13' AND (end_date > '2022-10-13' OR end_date IS NULL)) LIMIT ?[0m  [["medicine_id", 1], ["LIMIT", 1]]
+  [1m[36mMedicineCost Load (0.0ms)[0m  [1m[34mSELECT "medicine_costs".* FROM "medicine_costs" WHERE "medicine_costs"."medicine_id" = ? AND (start_date <= '2022-10-13' AND (end_date > '2022-10-13' OR end_date IS NULL)) ORDER BY "medicine_costs"."id" ASC LIMIT ?[0m  [["medicine_id", 1], ["LIMIT", 1]]
+  [1m[36mVisit Update (0.0ms)[0m  [1m[33mUPDATE "visits" SET "total_charge" = ? WHERE "visits"."id" = ?[0m  [["total_charge", 13100], ["id", 2]]
+  [1m[36mDosage Create (0.0ms)[0m  [1m[32mINSERT INTO "dosages" ("visit_id", "medicine_id", "units_given", "discount") VALUES (?, ?, ?, ?)[0m  [["visit_id", 2], ["medicine_id", 1], ["units_given", 50], ["discount", 0.0]]
+  [1m[36mMedicine Update (0.0ms)[0m  [1m[33mUPDATE "medicines" SET "stock_amount" = ? WHERE "medicines"."id" = ?[0m  [["stock_amount", 9900], ["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMedicine Load (0.0ms)[0m  [1m[34mSELECT "medicines".* FROM "medicines" WHERE "medicines"."active" = ?[0m  [["active", 1]]
+  [1m[36mMedicine Load (0.0ms)[0m  [1m[34mSELECT "medicines".* FROM "medicines" INNER JOIN "animal_medicines" ON "animal_medicines"."medicine_id" = "medicines"."id" WHERE (animal_medicines.animal_id = 1)[0m
+  [1m[36mMedicineCost Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "medicine_costs" WHERE "medicine_costs"."medicine_id" = ? AND (start_date <= '2022-10-13' AND (end_date > '2022-10-13' OR end_date IS NULL)) LIMIT ?[0m  [["medicine_id", 3], ["LIMIT", 1]]
+  [1m[36mMedicineCost Load (0.0ms)[0m  [1m[34mSELECT "medicine_costs".* FROM "medicine_costs" WHERE "medicine_costs"."medicine_id" = ? AND (start_date <= '2022-10-13' AND (end_date > '2022-10-13' OR end_date IS NULL)) ORDER BY "medicine_costs"."id" ASC LIMIT ?[0m  [["medicine_id", 3], ["LIMIT", 1]]
+  [1m[36mVisit Update (0.0ms)[0m  [1m[33mUPDATE "visits" SET "total_charge" = ? WHERE "visits"."id" = ?[0m  [["total_charge", 14900], ["id", 2]]
+  [1m[36mDosage Create (0.0ms)[0m  [1m[32mINSERT INTO "dosages" ("visit_id", "medicine_id", "units_given", "discount") VALUES (?, ?, ?, ?)[0m  [["visit_id", 2], ["medicine_id", 3], ["units_given", 50], ["discount", 0.1]]
+  [1m[36mMedicine Update (0.0ms)[0m  [1m[33mUPDATE "medicines" SET "stock_amount" = ? WHERE "medicines"."id" = ?[0m  [["stock_amount", 9950], ["id", 3]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mrollback transaction[0m
