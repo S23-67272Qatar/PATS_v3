@@ -60,7 +60,10 @@ class User < ApplicationRecord
     last_name + ", " + first_name
   end
 
-
+  # def vet?
+  #   return true if role=='vet'
+  # end
+  
  # we add this class method to handle logging in via username and password
 #  we use this method later in the sessions_controller.
 

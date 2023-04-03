@@ -65,10 +65,12 @@ class VisitsController < ApplicationController
     def set_visit
       @visit = Visit.find(params[:id])
     end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def visit_params
       params.require(:visit).permit(:pet_id, :date, :weight)
     end
+    
     def get_related_data
       @pet = @visit.pet
       @owner = @visit.pet.owner
