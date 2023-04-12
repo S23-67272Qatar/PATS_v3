@@ -46,7 +46,7 @@ gem 'materialize-form', '1.0.8'
 gem 'jquery-rails', '4.3.1'
 gem 'jquery-ui-rails', '6.0.1'
 gem 'cancancan', '3.4.0'
-gem 'validates_timeliness', git: "https://github.com/adzap/validates_timeliness"
+gem 'validates_timeliness', '~> 7.0.0.beta1'
 gem 'time_date_helpers', '0.0.2'
 gem 'carrierwave', '1.2.2'
 gem 'will_paginate', '3.3.1'
@@ -60,8 +60,8 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '~> 3.38.0'
-  gem 'selenium-webdriver', '3.8.0'
+  gem 'capybara'
+  gem 'selenium-webdriver'
   gem 'better_errors'
   gem 'binding_of_caller'
   # incompatible per https://github.com/dejan/rails_panel/issues/180

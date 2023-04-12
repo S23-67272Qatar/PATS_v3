@@ -18,5 +18,5 @@ Feature: Manage visits
     And I fill in "visit_weight" with "1"
     And I select "Dusty (Cat) : Heimann, Alex" from "visit_pet_id"
     And I press "Create Visit"
-    Then I should see "Successfully added visit"
+    Then I should see the flash message "Successfully added visit"
 

@@ -1,12 +1,4 @@
 GIT
-  remote: https://github.com/adzap/validates_timeliness
-  revision: beaca8685bd4a59fda5c7646cd5b9a2f754afc75
-  specs:
-    validates_timeliness (7.0.0.beta1)
-      activemodel (>= 7.0.0, < 8)
-      timeliness (>= 0.3.10, < 1)
-
-GIT
   remote: https://github.com/mmotherwell/best_in_place
   revision: 88eb3052623a9a6cd346864d2aca05021c2f80d0
   specs:
@@ -333,6 +325,9 @@ GEM
       concurrent-ruby (~> 1.0)
     uglifier (4.1.2)
       execjs (>= 0.3.0, < 3)
+    validates_timeliness (7.0.0.beta1)
+      activemodel (>= 7.0.0, < 8)
+      timeliness (>= 0.3.10, < 1)
     vuejs-rails (2.5.13)
     web-console (3.5.1)
       actionview (>= 5.0)
@@ -358,7 +353,7 @@ DEPENDENCIES
   binding_of_caller
   byebug
   cancancan (= 3.4.0)
-  capybara (~> 3.38.0)
+  capybara
   carrierwave (= 1.2.2)
   chronic (= 0.10.2)
   coffee-rails (= 5.0.0)
@@ -388,7 +383,7 @@ DEPENDENCIES
   rails-html-sanitizer (>= 1.0.4)
   rubyzip (>= 1.2.2)
   sass-rails (~> 6.0.0)
-  selenium-webdriver (= 3.8.0)
+  selenium-webdriver
   shoulda-context (~> 2.0.0)
   shoulda-matchers (~> 5.0.0)
   simple_form (= 4.0.0)
@@ -400,7 +395,7 @@ DEPENDENCIES
   time_date_helpers (= 0.0.2)
   tzinfo-data
   uglifier (= 4.1.2)
-  validates_timeliness!
+  validates_timeliness (~> 7.0.0.beta1)
   vuejs-rails (= 2.5.13)
   web-console (= 3.5.1)
   will_paginate (= 3.3.1)
